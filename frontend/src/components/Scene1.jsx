@@ -4,7 +4,6 @@ import { useGLTF, OrbitControls } from "@react-three/drei";
 import * as THREE from "three";
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import MacbookModel16 from "./models/Macbook-16";
 import { ScrollTrigger } from "gsap/all";
 import Lights from "./Lights";
 gsap.registerPlugin(ScrollTrigger);
