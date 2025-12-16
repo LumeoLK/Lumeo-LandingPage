@@ -10,7 +10,7 @@ import { useGLTF, useAnimations } from "@react-three/drei";
 export default function Model2(props) {
   const group = React.useRef();
   const { nodes, materials, animations } = useGLTF(
-    "public/models/model2-transformed.glb"
+    "/models/model2-transformed.glb"
   );
   const { actions } = useAnimations(animations, group);
   return (

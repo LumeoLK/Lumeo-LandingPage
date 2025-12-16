@@ -39,22 +39,39 @@ const Hero = () => {
           futuristic precision.
         </p>
 
-        {/* Button */}
         <a
           href="#explore"
           className="
             group relative inline-flex items-center justify-center
             px-7 py-3 rounded-lg overflow-hidden
             font-[Anton] tracking-wider text-3xl uppercase 
-            bg-[#fbb040] text-white border border-[#fbb040]
-            hover:bg-transparent hover:text-[#717171]
-            transition-all duration-300
-            mt-3 drop-shadow-lg
+            text-[#231f20] opacity-80 border border-[#fbb040]
           "
         >
-          <span className="absolute inset-0 opacity-0 group-hover:opacity-20 bg-[#717171] transition duration-300"></span>
-          Explore Now
+          {/* Liquid layer */}
+          <span
+            className="
+              absolute bottom-0 left-0 w-full h-0
+              bg-[#fbb040]
+              transition-all duration-500 ease-out
+              group-hover:h-full
+              z-0
+            "
+          ></span>
+
+          {/* Text */}
+          <span
+            className="
+              relative z-10
+              transition-colors duration-300
+              group-hover:text-white
+              drop-shadow-lg
+            "
+          >
+            Explore Now
+          </span>
         </a>
+
       </div>
     </section>
   );
