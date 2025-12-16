@@ -2,6 +2,7 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import Navbar from "../components/NavBar.jsx";
+<<<<<<< HEAD
 import AutoHideNavbar from "../components/AutoHideNavbar.jsx";
 import Hero from "../components/Hero.jsx";
 import FeaturesScroll from "../components/FeaturesScroll.jsx";
@@ -44,6 +45,19 @@ const Home = () => {
 
       </div>
     </>
+=======
+import NeonGridScene from "../components/NeonGridScene.jsx";
+
+const Home = () => {
+  return (
+    <div>
+      <Navbar />
+      <NeonGridScene />
+      <Hero />
+      <FeaturesHome />
+      <GetInTouch />
+    </div>
+>>>>>>> a6ce7302f269df583941900800163695fc751223
   );
 };
 

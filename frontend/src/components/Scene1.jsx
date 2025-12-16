@@ -88,7 +88,7 @@ function GLBScene({
 }
 
 export default function ThreeGLBViewerR3F({
-  modelPath = "public/models/model2-transformed.glb",
+  modelPath = "/models/model2-transformed.glb",
 }) {
   return (
     <section id="features" style={{ width: "100%", height: "200vh" }}>
@@ -118,7 +118,6 @@ export default function ThreeGLBViewerR3F({
         </Canvas>
       </div>
 
-      <h1>hi</h1>
     </section>
   );
 }

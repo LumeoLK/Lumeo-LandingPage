@@ -16,6 +16,7 @@
     "@fortawesome/react-fontawesome": "^3.1.0",
     "@gsap/react": "^2.1.2",
     "@react-three/drei": "^10.7.7",
+    "@react-three/fiber": "^9.4.2",
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^1.13.2",
     "flowbite": "^4.0.0",
@@ -27,7 +28,7 @@
     "react-router-dom": "^7.10.1",
     "react-three-fiber": "^6.0.13",
     "tailwindcss": "^4.1.17",
-    "three": "^0.181.1"
+    "three": "^0.181.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",

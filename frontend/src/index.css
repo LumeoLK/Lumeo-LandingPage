@@ -1,8 +1,12 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
 @import "tailwindcss";
 @import "flowbite/dist/flowbite.css";
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> a6ce7302f269df583941900800163695fc751223
 body {
   font-family: "Inter", sans-serif;
   margin: 0;
@@ -13,6 +17,7 @@ body {
   min-height: 100vh;
 }
 
+<<<<<<< HEAD
 html,
 body {
   overflow: hidden;
@@ -55,3 +60,20 @@ body {
 
 
 
+=======
+.card-stacker:hover .card {
+  margin-left: 10px;
+}
+.cards-wrapper:hover .card {
+  opacity: 0.5;
+  scale: 0.98;
+  filter: grayscale(20%);
+  transition: 0.3s ease;
+}
+
+.cards-wrapper .card:hover {
+  opacity: 1 !important;
+  scale: 1.05 !important;
+  filter: none !important;
+}
+>>>>>>> a6ce7302f269df583941900800163695fc751223
