@@ -18,7 +18,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
         </Routes> */}
-
+        <h1>HELLO WORLD</h1>
         <Footer />
       </BrowserRouter>
     </div>
