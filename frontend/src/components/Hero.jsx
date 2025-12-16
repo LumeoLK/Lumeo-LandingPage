@@ -3,7 +3,7 @@ import Scene1 from "./Scene1.jsx";
 
 const Hero = () => {
   return (
-    <section className="relative w-full h-screen overflow-hidden ">
+    <section className="relative w-full h-screen overflow-hidden">
 
       {/* 3D Scene Background */}
       <div className="absolute inset-0 z-0">

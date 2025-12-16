@@ -2,25 +2,56 @@
 @import "flowbite/dist/flowbite.css";
 @import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-body{
+
+body {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
-.card-stacker:hover .card{
-  margin-left: 10px;
-}
-.cards-wrapper:hover .card {
-  opacity: 0.5;
-  scale: 0.98;
-  filter: grayscale(20%);
-  transition: 0.3s ease;
+html,
+body {
+  overflow: hidden;
 }
 
-.cards-wrapper .card:hover {
-  opacity: 1 !important;
-  scale: 1.05 !important;
-  filter: none !important;
+/* Main scroll container */
+.snap-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
 }
+
+/* Hide scrollbar */
+.snap-container::-webkit-scrollbar {
+  display: none;
+}
+.snap-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Each section snap */
+.snap-section {
+  height: 100vh;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+/* Footer snap section */
+.footer-section {
+  width: 100%;
+  min-height: auto;
+  scroll-snap-align: end;
+  background: #dbdbdb;
+
+  /* Remove centering constraint */
+  display: block;
+  bottom: 50px;
+}
+
+
+
