@@ -11,13 +11,13 @@ const App = () => {
   return (
     <div>
       <BrowserRouter>
-        <Routes>
+        {/* <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/features" element={<Features />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/privacy" element={<Privacy />} />
-        </Routes>
+        </Routes> */}
 
         <Footer />
       </BrowserRouter>
