@@ -1,15 +1,16 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+
 @import "tailwindcss";
 @import "flowbite/dist/flowbite.css";
-@import url('https://fonts.googleapis.com/css2?family=Anton&display=swap');
 
-body{
+body {
   font-family: "Inter", sans-serif;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-.card-stacker:hover .card{
+.card-stacker:hover .card {
   margin-left: 10px;
 }
 .cards-wrapper:hover .card {
