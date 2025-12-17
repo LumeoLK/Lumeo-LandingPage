@@ -1,61 +1,77 @@
-import React from "react";
+import React, { useState } from "react";
 
 export default function Navbar() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const links = [
+    { name: "About Us", href: "#aboutus" },
+    { name: "Features", href: "#Features" },
+    { name: "Reach Us", href: "#Reachus" },
+    { name: "Privacy & Policy", href: "#privacypolicy" },
+  ];
+
   return (
-    <nav
-      className="p-4 top-5 z-50 font-robotoCond"
-      style={{ backgroundColor: "#dbdbdb" }}
-    >
-      <div className="container mx-auto flex justify-between items-center mt-4">
+    <nav className="
+      fixed top-5 left-1/2 -translate-x-1/2
+      w-[90%] max-w-[1440px]
+      bg-white/70 backdrop-blur-xl
+      rounded-2xl shadow-lg
+      z-50
+      transition-all duration-300
+    ">
+      <div className="flex justify-between items-center px-6 py-4">
         {/* Logo */}
-        <img src="/Lumeo Wordmark Black.png" alt="Lumeo Logo" className="h-10 ml-20" />
+        <img src="/Lumeo Wordmark Black.png" alt="Lumeo Logo" className="h-10" />
 
-        <div className="flex gap-6 mr-30">
-          <a
-            href="#aboutus"
-            className="px-4 py-2 rounded-xl transition-all duration-300 
-                       text-gray-600
-                       hover:text-black
-                       hover:-translate-y-1 hover:shadow-lg
-                       ring-1 ring-transparent hover:ring-black/50"
-          >
-            About Us
-          </a>
+        {/* Desktop Links */}
+        <div className="hidden md:flex gap-6">
+          {links.map((link, i) => (
+            <a
+              key={i}
+              href={link.href}
+              className="px-4 py-2 rounded-xl transition-all duration-300 
+                         text-gray-600
+                         hover:text-black
+                         hover:-translate-y-1 hover:shadow-lg
+                         ring-1 ring-transparent hover:ring-black/50"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
 
-          <a
-            href="#Features"
-            className="px-4 py-2 rounded-xl transition-all duration-300
-                       text-gray-600
-                       hover:text-black
-                       hover:-translate-y-1 hover:shadow-lg
-                       ring-1 ring-transparent hover:ring-black/50"
+        {/* Hamburger Menu Button */}
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="flex flex-col justify-between w-6 h-6 focus:outline-none"
           >
-            Features
-          </a>
-
-          <a
-            href="#Reachus"
-            className="px-4 py-2 rounded-xl transition-all duration-300
-                       text-gray-600
-                       hover:text-black
-                       hover:-translate-y-1 hover:shadow-lg
-                       ring-1 ring-transparent hover:ring-black/50"
-          >
-            Reach Us
-          </a>
-
-          <a
-            href="#privacypolicy"
-            className="px-4 py-2 rounded-xl transition-all duration-300
-                       text-gray-600
-                       hover:text-black
-                       hover:-translate-y-1 hover:shadow-lg
-                       ring-1 ring-transparent hover:ring-black/50"
-          >
-            Privacy & Policy
-          </a>
+            <span className={`block h-0.5 w-full bg-gray-700 transform transition duration-300 ${menuOpen ? "rotate-45 translate-y-2" : ""}`}></span>
+            <span className={`block h-0.5 w-full bg-gray-700 transition duration-300 ${menuOpen ? "opacity-0" : ""}`}></span>
+            <span className={`block h-0.5 w-full bg-gray-700 transform transition duration-300 ${menuOpen ? "-rotate-45 -translate-y-2" : ""}`}></span>
+          </button>
         </div>
       </div>
+
+      {/* Mobile Menu */}
+      {menuOpen && (
+        <div className="md:hidden flex flex-col gap-4 px-6 pb-4">
+          {links.map((link, i) => (
+            <a
+              key={i}
+              href={link.href}
+              onClick={() => setMenuOpen(false)} // close menu when clicked
+              className="px-4 py-2 rounded-xl transition-all duration-300 
+                         text-gray-600
+                         hover:text-black
+                         hover:-translate-y-1 hover:shadow-lg
+                         ring-1 ring-transparent hover:ring-black/50"
+            >
+              {link.name}
+            </a>
+          ))}
+        </div>
+      )}
     </nav>
   );
 }

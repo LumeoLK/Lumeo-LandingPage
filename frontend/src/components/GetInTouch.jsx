@@ -30,7 +30,7 @@ const GetInTouch = () => {
 
   return (
     <section id="Reachus" className="bg-[#dbdbdb] py-20 px-6 lg:px-20">
-      <div className="max-w-6xl mx-auto mb-12 text-center">
+      <div className="max-w-6xl mx-auto mb-5 text-center">
         <h2 className="text-6xl lg:text-6xl font-[Anton] text-[#717171]">
           GET IN TOUCH
         </h2>

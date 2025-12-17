@@ -88,6 +88,22 @@ const Footer = () => {
         </div>
       </div>
 
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        className="
+          fixed bottom-6 right-6
+          bg-[#fbb040]
+          text-white
+          p-3 rounded-full
+          shadow-lg
+          hover:scale-110
+          transition
+        "
+      >
+        ↑
+      </button>
+
+
       {/* Bottom decorative shadow / 3D effect */}
       {/* <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-gray-300 to-transparent pointer-events-none"></div> */}
     </footer>

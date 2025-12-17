@@ -4,7 +4,9 @@ import { motion } from "framer-motion";
 import Navbar from "../components/NavBar.jsx";
 import AutoHideNavbar from "../components/AutoHideNavbar.jsx";
 import Hero from "../components/Hero.jsx";
+import Problem from "../components/Problem.jsx";
 import FeaturesScroll from "../components/FeaturesScroll.jsx";
+import HowItWorks from "../components/HowItWorks.jsx";
 import AboutScroll from "../components/AboutScroll.jsx";
 import GetInTouch from "../components/GetInTouch.jsx";
 import Footer from "../components/Footer.jsx";
@@ -12,26 +14,41 @@ import Footer from "../components/Footer.jsx";
 const Home = () => {
   return (
     <>
-        <Navbar />
+      <Navbar />
 
       <div className="snap-container">
-        <section className="snap-section">
+        {/* HERO */}
+        <section className="snap-section relative">
           <Hero />
         </section>
 
-        <section className="snap-section">
+        {/* PROBLEM */}
+        <section className="snap-section bg-[#f5f5f5]">
+          <Problem />
+        </section>
+
+        {/* FEATURES */}
+        <section className="snap-section bg-white">
           <FeaturesScroll />
         </section>
 
-        <section className="snap-section">
+        {/* HOW IT WORKS */}
+        <section className="snap-section bg-[#dbdbdb]">
+          <HowItWorks />
+        </section>
+
+        {/* ABOUT */}
+        <section className="snap-section bg-white">
           <AboutScroll />
         </section>
 
-        <section className="snap-section">
+        {/* GET IN TOUCH */}
+        <section className="snap-section bg-[#f5f5f5]">
           <GetInTouch />
         </section>
 
-        <section className="footer-section">
+        {/* FOOTER */}
+        <section className="footer-section bg-[#231f20]">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -40,8 +57,6 @@ const Home = () => {
             <Footer />
           </motion.div>
         </section>
-
-
       </div>
     </>
   );

@@ -1,78 +1,146 @@
-import React from "react";
-import Scene1 from "./Scene1.jsx";
+import { motion, useMotionValue, useTransform } from "framer-motion";
+import { Canvas } from "@react-three/fiber";
+import { Suspense } from "react";
+
+/* Lando Norris–style reveal */
+const reveal = {
+  hidden: {
+    y: "120%",
+    clipPath: "inset(0 0 100% 0)",
+  },
+  show: {
+    y: "0%",
+    clipPath: "inset(0 0 0% 0)",
+  },
+};
 
 const Hero = () => {
-  return (
-    <section className="relative w-full h-screen overflow-hidden">
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
 
-      {/* 3D Scene Background */}
-      <div className="absolute inset-0 z-0">
-        <Scene1 />
+  const x = useTransform(mouseX, [-400, 400], [-12, 12]);
+  const y = useTransform(mouseY, [-400, 400], [-12, 12]);
+
+  return (
+    <section
+      className="relative w-full h-screen overflow-hidden bg-[#f5f5f5]"
+      onMouseMove={(e) => {
+        mouseX.set(e.clientX - window.innerWidth / 2);
+        mouseY.set(e.clientY - window.innerHeight / 2);
+      }}
+    >
+      {/* 3D Background */}
+      <div className="absolute inset-0 z-20">
+        <Canvas>
+          <Suspense fallback={null}>
+            <ambientLight intensity={0.6} />
+            <pointLight position={[10, 10, 10]} />
+            <mesh rotation={[0.4, 0.6, 0]}>
+              <boxGeometry args={[3, 3, 3]} />
+              <meshStandardMaterial color="#fbb040" />
+            </mesh>
+          </Suspense>
+        </Canvas>
       </div>
 
-      {/* Side Accent Line */}
-      <div className="absolute left-10 top-20 h-40 w-1 bg-[#717171] "></div>
+      {/* HERO CONTENT */}
+      <motion.div
+        style={{ x, y }}
+        initial="hidden"
+        animate="show"
+        className="absolute top-32 left-27 z-20 max-w-xl"
+      >
+      <motion.h1
+        className="relative font-[Anton] leading-none text-[#231f20]"
+        variants={{
+          show: { transition: { staggerChildren: 0.16 } },
+        }}
+      >
+        {/* Vertical Accent Line */}
+        <span className="absolute -left-6 top-4 h-[30%] w-[2px] bg-gray-400 opacity-95" />
 
-      {/* Text Section */}
-      <div className="absolute top-16 left-28 z-20 max-w-xl space-y-2 ">
-
-        <h1 className="relative text-white font-[Anton] leading-none">
-
-          <span className="block text-[12rem] tracking-tight relative z-20 text-[#231f20] opacity-80">
-            TRY IT
-          </span>
-
-          <span className="absolute left-19.5 top-1/2 transform -translate-y-1/4 z-25 ">
-            <span className="inline-block bg-[#fbb040] px-5 py-2.5 text-[7rem] font-[Anton] tracking-tight drop-shadow-lg">
-              BEFORE
-            </span>
-          </span>
-
-          <span className="block text-[5rem] tracking-tight mt-20 ml-10 relative z-30 text-[#231f20] opacity-80">
-            BUY IT
-          </span>
-        </h1>
-
-        <p className="text-gray-500 text-[1rem] leading-snug tracking-wide mt-5">
-          <b>LUMEO</b> lets you preview furniture in your space <br />using real-scale AR,
-          compare styles instantly, and <br />make confident interior decisions with
-          futuristic precision.
-        </p>
-
-        <a
-          href="#explore"
-          className="
-            group relative inline-flex items-center justify-center
-            px-7 py-3 rounded-lg overflow-hidden
-            font-[Anton] tracking-wider text-3xl uppercase 
-            text-[#231f20] opacity-80 border border-[#fbb040]
-          "
-        >
-          {/* Liquid layer */}
-          <span
-            className="
-              absolute bottom-0 left-0 w-full h-0
-              bg-[#fbb040]
-              transition-all duration-500 ease-out
-              group-hover:h-full
-              z-0
-            "
-          ></span>
-
-          {/* Text */}
-          <span
-            className="
-              relative z-10
-              transition-colors duration-300
-              group-hover:text-white
-              drop-shadow-lg
-            "
+        {/* TRY IT */}
+        <div className="overflow-hidden">
+          <motion.span
+            variants={reveal}
+            transition={{
+              duration: 0.9,
+              ease: [0.77, 0, 0.175, 1],
+            }}
+            className="block text-[12rem] opacity-80"
           >
+            TRY IT
+          </motion.span>
+        </div>
+
+        {/* BEFORE (OVERLAPPED) */}
+        <motion.span
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{
+            duration: 0.8,
+            ease: [0.77, 0, 0.175, 1],
+            delay: 0.55,
+          }}
+          className="absolute left-20.5 top-[9rem]
+                    bg-[#fbb040] px-6 py-2
+                    text-[7.5rem] text-white
+                    origin-left z-10"
+        >
+          BEFORE
+        </motion.span>
+
+        {/* BUY IT */}
+        <div className="overflow-hidden mt-22 ml-9">
+          <motion.span
+            variants={reveal}
+            transition={{
+              duration: 0.9,
+              ease: [0.77, 0, 0.175, 1],
+              delay: 0.75,
+            }}
+            className="block text-[5.5rem] opacity-80"
+          >
+            BUY IT
+          </motion.span>
+        </div>
+      </motion.h1>
+
+
+        {/* Description */}
+        <motion.p
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.35, duration: 0.6 }}
+          className="mt-4 text-gray-500 text-[0.95rem] leading-snug"
+        >
+          <b>LUMEO</b> lets you preview furniture in your space <br />
+          using real-scale AR, compare styles instantly, and <br />
+          make confident interior decisions with futuristic precision.
+        </motion.p>
+
+        {/* CTA */}
+        <motion.a
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.6 }}
+          href="#explore"
+          className="inline-block mt-6 px-8 py-3
+                     border border-[#fbb040]
+                     font-[Anton] text-2xl uppercase tracking-wider
+                     text-[#231f20] relative overflow-hidden group"
+        >
+          <span
+            className="absolute inset-0 bg-[#fbb040]
+                       scale-y-0 origin-bottom
+                       transition-transform duration-500
+                       group-hover:scale-y-100"
+          />
+          <span className="relative group-hover:text-white">
             Explore Now
           </span>
-        </a>
-
-      </div>
+        </motion.a>
+      </motion.div>
     </section>
   );
 };

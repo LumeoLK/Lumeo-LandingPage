@@ -41,15 +41,11 @@ body {
   position: relative;
 }
 
-/* Footer snap section */
 .footer-section {
-  width: 100%;
-  min-height: auto;
+  height: 100vh;               /* REQUIRED for snap */
   scroll-snap-align: end;
   background: #dbdbdb;
 
-  /* Remove centering constraint */
-  display: block;
-  bottom: 50px;
+  padding-top: 80px;           /* space above footer content */
+  padding-bottom: 120px;       /* breathing room at bottom */
 }
-
