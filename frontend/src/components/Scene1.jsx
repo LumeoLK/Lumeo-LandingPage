@@ -39,7 +39,7 @@ function GLBModel() {
     <primitive
       ref={ref}
       object={scene}
-      position={[0.27, -0.32, -1.35]}
+      position={[0.2, -0.32, -1.35]}
       rotation={[0, Math.PI / 6.3, 0]}
       scale={0.94}
     />
