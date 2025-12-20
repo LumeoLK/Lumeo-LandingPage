@@ -9,6 +9,34 @@ const comments = [
   "Wish I could try AR before buying furniture…",
   "Every purchase feels like a gamble.",
 ];
+const StaggerText = ({ children, className = "" }) => {
+  const text = typeof children === "string" ? children : "";
+
+  return (
+    <span className={`group inline-block cursor-pointer ${className}`}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="relative inline-block overflow-hidden align-top"
+          style={{ lineHeight: "1em" }}
+        >
+          <span
+            className="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full"
+            style={{ transitionDelay: `${i * 0.025}s` }}
+          >
+            {/* 1. Visible Letter */}
+            <span className="block">{char === " " ? "\u00A0" : char}</span>
+
+            {/* 2. Hidden Duplicate Letter (slides up from bottom) */}
+            <span className="block absolute top-full left-0">
+              {char === " " ? "\u00A0" : char}
+            </span>
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+};
 
 export default function Problem() {
   const width = 1440;
@@ -109,8 +137,22 @@ export default function Problem() {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             >
               <span className="absolute inset-0 bg-[#fbb040] translate-x-[-100%] animate-slideRight rounded-full"></span>
-              <span className="relative text-[8rem]">BUYING FURNITURE</span>
+              <span className="relative text-[8rem]"><div className="overflow-hidden py-2 w-90">
+              <StaggerText>BUYING</StaggerText>
+            </div></span>
             </motion.span>
+            <motion.span
+              className="block text-[4.5rem] md:text-[5.5rem] tracking-tight relative overflow-hidden mt-10p"
+              initial={{ width: 0 }}
+              animate={{ width: "100%" }}
+              transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
+            >
+              <span className="absolute inset-0 bg-[#fbb040] translate-x-[-100%] animate-slideRight rounded-full"></span>
+              <span className="relative text-[8rem]"><div className="overflow-hidden py-2 w-120">
+              <StaggerText>FURNITURE</StaggerText>
+            </div></span>
+            </motion.span>
+            
             <motion.span
               className="block text-[3.5rem] md:text-[4.5rem] tracking-wide relative overflow-hidden mt-[-10px]"
               initial={{ width: 0 }}
@@ -119,7 +161,7 @@ export default function Problem() {
             >
               <span className="absolute inset-0 bg-[#fbb040] translate-x-[-100%] animate-slideRight rounded-full"></span>
               <span className="relative">
-                <span className="text-[#fbb040]">ONLINE</span> SHOULDN'T
+                <span className="text-[#fbb040]"><StaggerText>ONLINE</StaggerText></span> <StaggerText>SHOULDN'T</StaggerText>
               </span>
             </motion.span>
             <motion.span
@@ -129,7 +171,7 @@ export default function Problem() {
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
             >
               <span className="absolute inset-0 bg-[#fbb040] translate-x-[-100%] animate-slideRight rounded-full"></span>
-              <span className="relative">BE A <span className="text-[#fbb040]">GAMBLE</span></span>
+              <span className="relative"><StaggerText>BE A</StaggerText> <span className="text-[#fbb040]"><StaggerText>GAMBLE</StaggerText></span></span>
             </motion.span>
           </h2>
           <p className="text-gray-300 text-md max-w-md mt-6">
