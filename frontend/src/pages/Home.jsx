@@ -21,8 +21,10 @@ const Home = () => {
         <section className="snap-section bg-[#f5f5f5]">
           <Interior />
         </section>
-        {/* HERO */}
-        <section className="snap-section relative">{/* <Hero /> */}</section>
+
+        <section className="snap-section relative">
+          <Hero />
+        </section>
 
         {/* PROBLEM */}
         <section className="snap-section bg-[#f5f5f5]">

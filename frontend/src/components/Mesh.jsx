@@ -8,7 +8,7 @@ import React from "react";
 import { useGraph } from "@react-three/fiber";
 import { useGLTF, Outlines } from "@react-three/drei";
 import { SkeletonUtils } from "three-stdlib";
-// REMOVED: import { motion } from 'framer-motion-3d'
+// import { motion } from 'framer-motion-3d'
 
 export function Model({ selectedName, onObjectClick, ...props }) {
   const { scene } = useGLTF("/models/mesh.glb");

@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 import { Canvas } from "@react-three/fiber";
 import { Suspense, useState } from "react";
 import Scene1 from "./Scene1";
-
+import { Html } from "@react-three/drei";
 /* Text reveal animation */
 const textReveal = {
   hidden: { y: "120%" },
@@ -25,7 +25,13 @@ export default function Hero() {
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
         <Canvas camera={{ position: [1.5, 1.5, 2], fov: 35 }} shadows>
-          <Suspense fallback={<span className="text-white">Loading model...</span>}>
+          <Suspense
+            fallback={
+              <Html center>
+                <span className="text-white">Loading model...</span>
+              </Html>
+            }
+          >
             <Scene1 onLoad={() => setLoaded(true)} />
           </Suspense>
         </Canvas>
@@ -75,10 +81,12 @@ export default function Hero() {
           transition={{ delay: 1.35 }}
           className="mt-4 text-gray-500 text-sm"
         >
-          <b>LUMEO</b> lets you preview furniture in your space<br />
-          in real time, explore multiple styles, colors, and layouts,<br />
-          experience how each piece fits in your room using real-scale <br /> AR,
-          and make confident decisions before you buy.
+          <b>LUMEO</b> lets you preview furniture in your space
+          <br />
+          in real time, explore multiple styles, colors, and layouts,
+          <br />
+          experience how each piece fits in your room using real-scale <br />{" "}
+          AR, and make confident decisions before you buy.
         </motion.p>
 
         <motion.a
