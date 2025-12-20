@@ -30,22 +30,13 @@ body {
   display: none;
 }
 .snap-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y proximity;
 }
 
-/* Each section snap */
 .snap-section {
   height: 100vh;
   scroll-snap-align: start;
-  position: relative;
 }
 
-.footer-section {
-  height: 100vh;               /* REQUIRED for snap */
-  scroll-snap-align: end;
-  background: #dbdbdb;
-
-  padding-top: 80px;           /* space above footer content */
-  padding-bottom: 120px;       /* breathing room at bottom */
-}

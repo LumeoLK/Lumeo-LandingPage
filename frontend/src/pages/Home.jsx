@@ -51,8 +51,7 @@ const Home = () => {
           <GetInTouch />
         </section>
 
-        {/* FOOTER */}
-        <section className="footer-section bg-[#231f20]">
+        <section className="bg-[#dbdbdb]">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -61,6 +60,7 @@ const Home = () => {
             <Footer />
           </motion.div>
         </section>
+
       </div>
     </>
   );
