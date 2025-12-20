@@ -9,6 +9,35 @@ const textReveal = {
   show: { y: "0%" },
 };
 
+const StaggerText = ({ children, className = "" }) => {
+  const text = typeof children === "string" ? children : "";
+
+  return (
+    <span className={`group inline-block cursor-pointer ${className}`}>
+      {text.split("").map((char, i) => (
+        <span
+          key={i}
+          className="relative inline-block overflow-hidden align-top"
+          style={{ lineHeight: "1em" }}
+        >
+          <span
+            className="block transition-transform duration-500 ease-[cubic-bezier(0.76,0,0.24,1)] group-hover:-translate-y-full"
+            style={{ transitionDelay: `${i * 0.025}s` }}
+          >
+            {/* 1. Visible Letter */}
+            <span className="block">{char === " " ? "\u00A0" : char}</span>
+
+            {/* 2. Hidden Duplicate Letter (slides up from bottom) */}
+            <span className="block absolute top-full left-0">
+              {char === " " ? "\u00A0" : char}
+            </span>
+          </span>
+        </span>
+      ))}
+    </span>
+  );
+};
+
 export default function Hero() {
   const [loaded, setLoaded] = useState(false);
 
@@ -51,7 +80,9 @@ export default function Hero() {
               transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
               className="block text-[12rem] opacity-80"
             >
-              TRY IT
+              <div className="overflow-hidden py-2">
+                <StaggerText>TRY IT</StaggerText>
+              </div>
             </motion.span>
           </div>
 
@@ -61,7 +92,9 @@ export default function Hero() {
             transition={{ duration: 0.8, delay: 0.55 }}
             className="absolute left-20.5 top-[9rem] bg-[#fbb040] px-6 py-2 text-[7.5rem] text-white origin-left z-10"
           >
-            BEFORE
+            <div className="overflow-hidden py-2 w-80">
+              <StaggerText>BEFORE</StaggerText>
+            </div>
           </motion.span>
 
           <div className="overflow-hidden mt-22 ml-9">
@@ -70,7 +103,9 @@ export default function Hero() {
               transition={{ duration: 0.9, delay: 0.75 }}
               className="block text-[5.5rem] opacity-80"
             >
-              BUY IT
+              <div className="overflow-hidden py-2">
+              <StaggerText>BUY IT</StaggerText>
+            </div>
             </motion.span>
           </div>
         </motion.h1>
