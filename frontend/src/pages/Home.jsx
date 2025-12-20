@@ -10,6 +10,7 @@ import HowItWorks from "../components/HowItWorks.jsx";
 import AboutScroll from "../components/AboutScroll.jsx";
 import GetInTouch from "../components/GetInTouch.jsx";
 import Footer from "../components/Footer.jsx";
+import Interior from "../components/Interior.jsx";
 
 const Home = () => {
   return (
@@ -17,10 +18,11 @@ const Home = () => {
       <Navbar />
 
       <div className="snap-container">
-        {/* HERO */}
-        <section className="snap-section relative">
-          <Hero />
+        <section className="snap-section bg-[#f5f5f5]">
+          <Interior />
         </section>
+        {/* HERO */}
+        <section className="snap-section relative">{/* <Hero /> */}</section>
 
         {/* PROBLEM */}
         <section className="snap-section bg-[#f5f5f5]">
