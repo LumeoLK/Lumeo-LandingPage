@@ -4,33 +4,20 @@ import { Environment, Lightformer } from "@react-three/drei";
 export default function Lights() {
   return (
     <group name="lights">
-      <ambientLight intensity={0.6} color={"#ffffff"} />
-
+      <ambientLight intensity={0.55} color="#ffffff" />
+      <hemisphereLight intensity={0.35} skyColor="#ffffff" groundColor="#dcdcdc" />
       <directionalLight
-        position={[-30, 40, 20]}
-        intensity={1.2}
-        color={"#ffffff"}
+        position={[25, 35, 15]}
+        intensity={1.15}
+        color="#fff8ee"
         castShadow
         shadow-mapSize-width={2048}
         shadow-mapSize-height={2048}
-        shadow-radius={5}
+        shadow-radius={4}
       />
-
-      <spotLight
-        position={[20, 15, -20]}
-        angle={0.4}
-        decay={2}
-        intensity={0.3}
-        color={"#f0f0f0"}
-      />
-
+      <spotLight position={[-15, 20, -10]} angle={0.5} intensity={0.25} decay={2} color="#f4f6ff" />
       <Environment resolution={256}>
-        <Lightformer
-          form="rect"
-          intensity={1.2}
-          position={[0, 20, 0]}
-          scale={40}
-        />
+        <Lightformer form="rect" intensity={0.8} position={[0, 30, 0]} scale={50} />
       </Environment>
     </group>
   );
