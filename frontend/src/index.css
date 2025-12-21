@@ -20,6 +20,8 @@ body {
 
 /* Main scroll container */
 .snap-container {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
   height: 100vh;
   overflow-y: scroll;
   scroll-snap-type: y mandatory;
@@ -38,5 +40,5 @@ body {
 .snap-section {
   height: 100vh;
   scroll-snap-align: start;
+  position: relative;
 }
-
