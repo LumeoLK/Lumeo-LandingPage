@@ -61,8 +61,12 @@ export default function Problem() {
   ];
 
   return (
-    <section className="relative px-16 py-28 overflow-hidden" style={{ backgroundColor: "#231b16ff" }}>
-      {/* Wavy lines SVG */}
+<section 
+  // Added "min-h-screen" to fill the viewport height
+  // Added "flex flex-col justify-center" to vertically center the content if the screen is tall
+  className="relative px-16 py-28 overflow-hidden w-full min-h-screen flex flex-col justify-center" 
+  style={{ backgroundColor: "#231b16ff" }}
+>      {/* Wavy lines SVG */}
       <svg
         className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-visible"
         viewBox={`0 0 ${width} ${height}`}
