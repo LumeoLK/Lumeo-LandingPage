@@ -30,21 +30,22 @@ const GetInTouch = () => {
 
   return (
     <section id="Reachus" className="bg-[#dbdbdb] py-20 px-6 lg:px-20">
-      <div className="max-w-6xl mx-auto mb-5 text-center">
+      <div className="max-w-6xl mx-auto mb-5 text-center mt-11">
         <h2 className="text-6xl lg:text-6xl font-[Anton] text-[#717171]">
           GET IN TOUCH
         </h2>
       </div>
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 items-start">
-        
         {/* Left Side */}
         <div className="flex flex-col gap-3 w-full lg:w-1/2">
-
           {/* Name & Email */}
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4">
             <div className="flex flex-col gap-2">
               <div>
-                <Label htmlFor="input-name" className="text-[#dbdbdb] text-xs uppercase tracking-wide">
+                <Label
+                  htmlFor="input-name"
+                  className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+                >
                   Name
                 </Label>
                 <TextInput
@@ -58,7 +59,10 @@ const GetInTouch = () => {
               </div>
 
               <div>
-                <Label htmlFor="email1" className="text-[#dbdbdb] text-xs uppercase tracking-wide">
+                <Label
+                  htmlFor="email1"
+                  className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+                >
                   Email
                 </Label>
                 <TextInput
@@ -76,7 +80,10 @@ const GetInTouch = () => {
 
           {/* Subject */}
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4">
-            <Label htmlFor="input-subject" className="text-[#dbdbdb] text-xs uppercase tracking-wide">
+            <Label
+              htmlFor="input-subject"
+              className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+            >
               Subject
             </Label>
             <TextInput
@@ -91,7 +98,10 @@ const GetInTouch = () => {
 
           {/* Message & Button */}
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4 flex flex-col gap-2">
-            <Label htmlFor="comment" className="text-[#dbdbdb] text-xs uppercase tracking-wide">
+            <Label
+              htmlFor="comment"
+              className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+            >
               Message
             </Label>
             <Textarea
@@ -115,9 +125,7 @@ const GetInTouch = () => {
         </div>
 
         {/* Right Side Illustration */}
-        <div className="w-full lg:w-1/2 flex justify-center items-center">
-          
-        </div>
+        <div className="w-full lg:w-1/2 flex justify-center items-center"></div>
       </div>
     </section>
   );

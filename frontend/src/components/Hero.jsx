@@ -5,8 +5,8 @@ import Scene1 from "./Scene1";
 import { Html } from "@react-three/drei";
 /* Text reveal animation */
 const textReveal = {
-  hidden: { y: "120%" },
-  show: { y: "0%" },
+  hidden: { y: 100, opacity: 0 },
+  visible: { y: 0, opacity: 1 },
 };
 
 const StaggerText = ({ children, className = "" }) => {
@@ -53,7 +53,11 @@ export default function Hero() {
         animate={{ opacity: loaded ? 1 : 0 }}
         transition={{ duration: 1.2, ease: "easeOut" }}
       >
-        <Canvas camera={{ position: [1.5, 1.5, 2], fov: 35 }} shadows>
+        <Canvas
+          camera={{ position: [1.5, 1.5, 2], fov: 35 }}
+          // shadows
+          dpr={[1, 1.5]} // <--- ADD THIS. Forces max 1.5x pixel density (visuals look 99% same, performance +50%)
+        >
           <Suspense
             fallback={
               <Html center>
@@ -77,6 +81,9 @@ export default function Hero() {
           <div className="overflow-hidden">
             <motion.span
               variants={textReveal}
+              initial="hidden" // <--- TELL IT WHERE TO START
+              whileInView="visible" // <--- TELL IT WHEN TO ANIMATE (or use animate="visible")
+              viewport={{ once: true }} // Optional: Ensures it doesn't reset when you scroll up
               transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
               className="block text-[12rem] opacity-80"
             >
@@ -86,26 +93,34 @@ export default function Hero() {
             </motion.span>
           </div>
 
-          <motion.span
-            initial={{ scaleX: 0 }}
-            animate={{ scaleX: 1 }}
-            transition={{ duration: 0.8, delay: 0.55 }}
-            className="absolute left-20.5 top-[9rem] bg-[#fbb040] px-6 py-2 text-[7.5rem] text-white origin-left z-10"
+          <motion.div
+            // 1. We animate width instead of scale
+            initial={{ width: 0 }}
+            animate={{ width: "23rem" }} // "w-80" equivalent in rem (80 * 0.25)
+            transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }} // Added a custom ease for a premium feel
+            // 2. Crucial CSS classes:
+            // - overflow-hidden: Hides text when width is small
+            // - whitespace-nowrap: Prevents text from jumping to the next line as it grows
+            className="absolute left-20.5 top-[9rem] h-auto bg-[#fbb040] text-white z-10 overflow-hidden whitespace-nowrap origin-left"
           >
-            <div className="overflow-hidden py-2 w-80">
+            {/* Inner padding container */}
+            <div className="px-6 py-4 text-[7.5rem] leading-none">
               <StaggerText>BEFORE</StaggerText>
             </div>
-          </motion.span>
+          </motion.div>
 
           <div className="overflow-hidden mt-22 ml-9">
             <motion.span
               variants={textReveal}
-              transition={{ duration: 0.9, delay: 0.75 }}
+              initial="hidden" // <--- TELL IT WHERE TO START
+              whileInView="visible" // <--- TELL IT WHEN TO ANIMATE (or use animate="visible")
+              viewport={{ once: true }} // Optional: Ensures it doesn't reset when you scroll up
+              transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
               className="block text-[5.5rem] opacity-80"
             >
               <div className="overflow-hidden py-2">
-              <StaggerText>BUY IT</StaggerText>
-            </div>
+                <StaggerText>BUY IT</StaggerText>
+              </div>
             </motion.span>
           </div>
         </motion.h1>
