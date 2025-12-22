@@ -2,7 +2,6 @@ import React, { useState } from "react";
 // REMOVED: import axios from "axios"; (Not used)
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import emailjs from "@emailjs/browser";
-import axios from "axios";
 
 const GetInTouch = () => {
   const [email, setEmail] = useState("");
@@ -12,34 +11,47 @@ const GetInTouch = () => {
   const [status, setStatus] = useState(""); // Added to show feedback
 
   // WARNING: Ideally, move these to a .env file!
+ 
 
-  const sendMail = (e) => {
+  
+
+ const sendMail = async (e) => {
     e.preventDefault(); // This now stops the page reload properly
     setStatus("Sending...");
+
     const data = {
-      serviceId: "service_bd7lwvy",
-      templateId: "template_mpgeakg",
-      publicKey: "ZQNJmGAAzg822K36s",
-      templateParams: {
+      service_id: "service_bd7lwvy",
+      template_id: "template_mpgeakg",
+      user_id: "ZQNJmGAAzg822K36s",
+      template_params: {
         from_name: name,
         from_email: email,
         to_name: "Lumeo Team",
         message: message,
-        // subject: subject, // Added subject to params so it sends too
       },
     };
 
-      try {
-        const res = axios.post("https://api.emailjs.com/api/v1.0/email/send",data)
-        console.log(res.data);
-        setEmail("");
-        setName("");
-        setSubject("");
-        setMessage("");
-      } catch (error) {
-         console.error("FAILED...", err);
-        setStatus("Failed to send.");
-      }
+    try {
+      const res = await axios.post(
+        "https://api.emailjs.com/api/v1.0/email/send",
+        data,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      console.log("Email sent", res.data);
+      setEmail("");
+      setName("");
+      setSubject("");
+      setMessage("");
+      setStatus("Message sent successfully!");
+    } catch (error) {
+      console.error("EmailJS error:", error.response?.data || error.message);
+      setStatus("Failed to send.");
+    }
   };
 
   return (
