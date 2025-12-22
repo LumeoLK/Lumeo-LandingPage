@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import axios from "axios"; 
+import axios from "axios";
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import emailjs from "@emailjs/browser";
 
@@ -11,11 +11,8 @@ const GetInTouch = () => {
   const [status, setStatus] = useState(""); // Added to show feedback
 
   // WARNING: Ideally, move these to a .env file!
- 
 
-  
-
- const sendMail = async (e) => {
+  const sendMail = async (e) => {
     e.preventDefault(); // This now stops the page reload properly
     setStatus("Sending...");
 
@@ -43,6 +40,24 @@ const GetInTouch = () => {
       );
 
       console.log("Email sent", res.data);
+      const sheetData = {
+        from_name: name,
+        from_email: email,
+        message: message,
+      };
+
+      const ress = await axios.post(
+        "https://script.google.com/a/macros/iit.ac.lk/s/AKfycbxsLP--2Ou3aQ9PdICSINNqFthcCJpxeSnTLaJdCau1Mo2PftKFrO1HNtx__Oexz3qCIg/exec",
+        sheetData,
+        { headers: { "Content-Type": "application/json" } }
+      );
+
+      if (ress.data.status === "success") {
+        console.log("Message saved to Google Sheet!");
+      } else {
+        console.error("Google Sheet error:", ress.data.message);
+      }
+
       setEmail("");
       setName("");
       setSubject("");
