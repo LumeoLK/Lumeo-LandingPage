@@ -79,9 +79,9 @@ export default function Hero() {
               <motion.span
                 variants={textReveal}
                 transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
-                className="block text-[12rem] opacity-85"
+                className="block text-[12.5rem] opacity-75"
               >
-                <div className="overflow-hidden py-2">
+                <div className="overflow-hidden py-0.75">
                   <StaggerText>TRY IT</StaggerText>
                 </div>
               </motion.span>
@@ -90,29 +90,29 @@ export default function Hero() {
             {/* BLOCK 2: BEFORE */}
             <motion.div
               // FIX 2: Fixed invalid 'left-20.5' to arbitrary value
-              className="absolute left-[5.125rem] top-[9rem] h-auto bg-[#fbb040] text-white z-10 overflow-hidden whitespace-nowrap origin-left"
+              className="absolute left-[5.4rem] top-[9.25rem] h-auto bg-[#fbb040] text-white z-10 overflow-hidden whitespace-nowrap origin-left"
               initial={{ width: 0 }}
               variants={{
                 // We define this as a variant so the parent can trigger it
                 visible: {
-                  width: "23rem",
+                  width: "24rem",
                   transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] },
                 },
                 hidden: { width: 0 },
               }}
             >
-              <div className="px-6 py-4 text-[7.5rem] leading-none">
+              <div className="px-5 py-4 text-[7.9rem] leading-none">
                 <StaggerText>BEFORE</StaggerText>
               </div>
             </motion.div>
 
             {/* BLOCK 3: BUY IT */}
             {/* FIX 2: Fixed invalid 'mt-22' to arbitrary value */}
-            <div className="overflow-hidden mt-[5.5rem] ml-9">
+            <div className="overflow-hidden mt-[5.7rem] ml-9.5">
               <motion.span
                 variants={textReveal}
                 transition={{ duration: 0.9, ease: [0.77, 0, 0.175, 1] }}
-                className="block text-[5.5rem] opacity-80"
+                className="block text-[5.7rem] opacity-80"
               >
                 <div className="overflow-hidden py-2">
                   <StaggerText>BUY IT</StaggerText>
@@ -125,7 +125,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 24 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.35 }}
-            className="mt-4 text-gray-500 text-sm"
+            className="mt-0 text-gray-500 text-sm"
           >
             <b>LUMEO</b> lets you preview furniture in your space
             <br />
@@ -140,11 +140,40 @@ export default function Hero() {
             whileInView={{ opacity: 1 }}
             transition={{ delay: 1.6 }}
             href="#explore"
-            className="inline-block mt-6 px-8 py-3 border border-[#fbb040] font-[Anton] text-2xl uppercase text-[#231f20] relative overflow-hidden group"
+            className="
+              inline-block mt-4 px-8 py-3
+              border-1 border-[#231f20]
+              font-[Anton] text-2xl uppercase
+              text-[#231f20]
+              relative overflow-hidden group
+              transition-[border-color,color] duration-300
+              hover:border-[#fbb040]
+            "
           >
-            <span className="absolute inset-0 bg-[#fbb040] scale-y-0 origin-bottom transition-transform duration-500 group-hover:scale-y-100" />
-            <span className="relative group-hover:text-white">Explore Now</span>
+            {/* Fill layer */}
+            <span
+              className="
+                absolute inset-0
+                bg-[#fbb040]
+                scale-y-0 origin-bottom
+                transition-transform duration-500
+                group-hover:scale-y-100
+                z-0
+              "
+            />
+
+            {/* Text */}
+            <span
+              className="
+                relative z-10
+                transition-colors duration-300
+                group-hover:text-white
+              "
+            >
+              Explore Now
+            </span>
           </motion.a>
+
         </motion.div>
       </div>
     </section>
