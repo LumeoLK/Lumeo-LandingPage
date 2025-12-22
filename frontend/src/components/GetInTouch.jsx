@@ -46,10 +46,15 @@ const GetInTouch = () => {
         message: message,
       };
 
+      // --- FIXED AXIOS CALL ---
       const ress = await axios.post(
-        "https://script.google.com/a/macros/iit.ac.lk/s/AKfycbxsLP--2Ou3aQ9PdICSINNqFthcCJpxeSnTLaJdCau1Mo2PftKFrO1HNtx__Oexz3qCIg/exec",
-        sheetData,
-        { headers: { "Content-Type": "application/json" } }
+        "https://script.google.com/macros/s/AKfycbyYc02RKI2Znn2KAmZ0kbKi5VGh9-6SLv6BkbH-AlwhKyNyky7BxbW6bo4p0J7w6C9g5Q/exec",
+        JSON.stringify(sheetData), // 1. Manually stringify the data
+        {
+          headers: {
+            "Content-Type": "text/plain;charset=utf-8", // 2. This bypasses the CORS preflight check
+          },
+        }
       );
 
       if (ress.data.status === "success") {
