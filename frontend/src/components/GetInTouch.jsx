@@ -1,20 +1,24 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Button, Label, TextInput, Textarea } from "flowbite-react";
-import emailjs from "@emailjs/browser";
+import { Label, TextInput, Textarea } from "flowbite-react"; // Removed Button from here
+import { Toaster, toast } from "sonner"; // <--- Import Sonner
+import { LiquidButton } from "./LiquidButton.jsx"; // <--- Import your new component
 
 const GetInTouch = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [subject, setSubject] = useState("");
   const [message, setMessage] = useState("");
-  const [status, setStatus] = useState(""); // Added to show feedback
 
-  // WARNING: Ideally, move these to a .env file!
+  // Animation States
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const sendMail = async (e) => {
-    e.preventDefault(); // This now stops the page reload properly
-    setStatus("Sending...");
+    e.preventDefault();
+
+    // Start Animation
+    setIsSubmitting(true);
 
     const data = {
       service_id: "service_bd7lwvy",
@@ -28,33 +32,23 @@ const GetInTouch = () => {
       },
     };
 
+    const sheetData = {
+      from_name: name,
+      from_email: email,
+      message: message,
+    };
+
     try {
-      const res = await axios.post(
-        "https://api.emailjs.com/api/v1.0/email/send",
-        data,
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // 1. Send to EmailJS
+      await axios.post("https://api.emailjs.com/api/v1.0/email/send", data, {
+        headers: { "Content-Type": "application/json" },
+      });
 
-      console.log("Email sent", res.data);
-      const sheetData = {
-        from_name: name,
-        from_email: email,
-        message: message,
-      };
-
-      // --- FIXED AXIOS CALL ---
+      // 2. Send to Google Sheets (CORS fixed)
       const ress = await axios.post(
         "https://script.google.com/macros/s/AKfycbyYc02RKI2Znn2KAmZ0kbKi5VGh9-6SLv6BkbH-AlwhKyNyky7BxbW6bo4p0J7w6C9g5Q/exec",
-        JSON.stringify(sheetData), // 1. Manually stringify the data
-        {
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8", // 2. This bypasses the CORS preflight check
-          },
-        }
+        JSON.stringify(sheetData),
+        { headers: { "Content-Type": "text/plain;charset=utf-8" } }
       );
 
       if (ress.data.status === "success") {
@@ -63,19 +57,35 @@ const GetInTouch = () => {
         console.error("Google Sheet error:", ress.data.message);
       }
 
+      // 3. Handle Success
+      setIsSubmitting(false); // Stop "loading"
+      setIsSuccess(true); // Trigger Green "Success" state
+      toast.success("Message sent successfully!"); // Show Notification
+
+      // Clear Form
       setEmail("");
       setName("");
       setSubject("");
       setMessage("");
-      setStatus("Message sent successfully!");
+
+      // Reset button state after 3 seconds so user can send another if needed
+      setTimeout(() => {
+        setIsSuccess(false);
+      }, 3000);
     } catch (error) {
-      console.error("EmailJS error:", error.response?.data || error.message);
-      setStatus("Failed to send.");
+      console.error("Error:", error.response?.data || error.message);
+
+      // Handle Error
+      setIsSubmitting(false);
+      toast.error("Failed to send message. Please try again.");
     }
   };
 
   return (
-    <section id="Reachus" className="bg-[#dbdbdb] py-20 px-6 lg:px-20">
+    <section id="Reachus" className="bg-[#dbdbdb] py-20 px-6 lg:px-20 relative">
+      {/* REQUIRED: This renders the toast notifications */}
+      <Toaster position="top-center" richColors />
+
       <div className="max-w-6xl mx-auto mb-5 text-center mt-11">
         <h2 className="text-6xl lg:text-6xl font-[Anton] text-[#717171]">
           GET IN TOUCH
@@ -83,7 +93,6 @@ const GetInTouch = () => {
       </div>
 
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 items-start">
-        {/* ADDED FORM TAG HERE */}
         <form
           onSubmit={sendMail}
           className="flex flex-col gap-3 w-full lg:w-1/2"
@@ -101,9 +110,10 @@ const GetInTouch = () => {
                 <TextInput
                   id="input-name"
                   placeholder="Your name"
-                  required // Now this works!
+                  required
                   value={name}
                   onChange={(e) => setName(e.target.value)}
+                  disabled={isSubmitting || isSuccess}
                   className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
                 />
               </div>
@@ -119,9 +129,10 @@ const GetInTouch = () => {
                   id="email1"
                   type="email"
                   placeholder="name@example.com"
-                  required // Now this works!
+                  required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
+                  disabled={isSubmitting || isSuccess}
                   className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
                 />
               </div>
@@ -142,11 +153,12 @@ const GetInTouch = () => {
               required
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
+              disabled={isSubmitting || isSuccess}
               className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
             />
           </div>
 
-          {/* Message & Button */}
+          {/* Message & Animated Button */}
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4 flex flex-col gap-2">
             <Label
               htmlFor="comment"
@@ -161,20 +173,22 @@ const GetInTouch = () => {
               required
               value={message}
               onChange={(e) => setMessage(e.target.value)}
+              disabled={isSubmitting || isSuccess}
               className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
             />
 
-            {/* REMOVED onClick={sendMail} from button. The form onSubmit handles it now. */}
-            <Button
-              type="submit"
-              className="mt-2 bg-[#fbb040] hover:bg-[#faae1c] text-white font-medium rounded-lg"
-            >
-              {status || "Submit"}
-            </Button>
+            {/* REPLACED Flowbite Button with LiquidButton */}
+            <div className="mt-2">
+              <LiquidButton isSubmitting={isSubmitting} isSuccess={isSuccess}>
+                SUBMIT MESSAGE
+              </LiquidButton>
+            </div>
           </div>
         </form>
 
-        <div className="w-full lg:w-1/2 flex justify-center items-center"></div>
+        <div className="w-full lg:w-1/2 flex justify-center items-center">
+          {/* You can put an image or map here later */}
+        </div>
       </div>
     </section>
   );
