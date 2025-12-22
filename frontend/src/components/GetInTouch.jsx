@@ -103,7 +103,7 @@ const GetInTouch = () => {
               <div>
                 <Label
                   htmlFor="input-name"
-                  className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+                  className="!text-[#717171]  text-xs uppercase tracking-wide"
                 >
                   Name
                 </Label>
@@ -114,14 +114,14 @@ const GetInTouch = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={isSubmitting || isSuccess}
-                  className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
+                  className="!bg-[#ffffff] text-[#484546] border-[#e9e9e9] placeholder-gray-400"
                 />
               </div>
 
               <div>
                 <Label
                   htmlFor="email1"
-                  className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+                  className="!text-[#717171]  text-xs uppercase tracking-wide"
                 >
                   Email
                 </Label>
@@ -133,7 +133,7 @@ const GetInTouch = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isSubmitting || isSuccess}
-                  className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
+                  className="!bg-[#ffffff] text-[#484546] !border-[#e9e9e9] placeholder-gray-400"
                 />
               </div>
             </div>
@@ -143,7 +143,7 @@ const GetInTouch = () => {
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4">
             <Label
               htmlFor="input-subject"
-              className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+              className="!text-[#717171] text-xs uppercase tracking-wide"
             >
               Subject
             </Label>
@@ -162,7 +162,7 @@ const GetInTouch = () => {
           <div className="bg-white/20 backdrop-blur-md border border-white/30 rounded-2xl p-4 flex flex-col gap-2">
             <Label
               htmlFor="comment"
-              className="text-[#dbdbdb] text-xs uppercase tracking-wide"
+              className="!text-[#717171] text-xs uppercase tracking-wide"
             >
               Message
             </Label>
@@ -174,7 +174,7 @@ const GetInTouch = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               disabled={isSubmitting || isSuccess}
-              className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
+              className="!bg-[#ffffff] text-[#484546] !border-[#e9e9e9] placeholder-gray-400"
             />
 
             {/* REPLACED Flowbite Button with LiquidButton */}
