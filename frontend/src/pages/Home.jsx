@@ -28,11 +28,12 @@ const Home = () => {
         - snap-y snap-mandatory: Enables the locking physics
         - scroll-smooth: smooths out anchor links
       */}
+     
       <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
         {/* HERO */}
-        {/* <section className="h-screen w-full snap-start snap-always relative">
+        <section className="h-screen w-full snap-start snap-always relative">
           <Hero />
-        </section> */}
+        </section>
 
         {/* PROBLEM - (This is the component we fixed earlier) */}
         <section className="h-screen w-full snap-start snap-always bg-[#f5f5f5]">
