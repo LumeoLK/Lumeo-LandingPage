@@ -68,7 +68,7 @@ export default function Problem() {
   style={{ backgroundColor: "#231b16ff" }}
 >      {/* Wavy lines SVG */}
       <svg
-        className="absolute top-0 left-0 w-full h-full pointer-events-none overflow-visible"
+        className="absolute top-0 left-0  pointer-events-none overflow-hidden"
         viewBox={`0 0 ${width} ${height}`}
         preserveAspectRatio="none"
       >
