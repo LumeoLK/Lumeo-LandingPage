@@ -2,6 +2,7 @@ import React, { useState } from "react";
 // REMOVED: import axios from "axios"; (Not used)
 import { Button, Label, TextInput, Textarea } from "flowbite-react";
 import emailjs from "@emailjs/browser";
+import axios from "axios";
 
 const GetInTouch = () => {
   const [email, setEmail] = useState("");
@@ -11,37 +12,34 @@ const GetInTouch = () => {
   const [status, setStatus] = useState(""); // Added to show feedback
 
   // WARNING: Ideally, move these to a .env file!
-  const serviceId = "service_bd7lwvy";
-  const templateId = "template_mpgeakg";
-  const publicKey = "ZQNJmGAAzg822K36s";
-
-  const templateParams = {
-    from_name: name,
-    from_email: email,
-    to_name: "Lumeo Team",
-    message: message,
-    // subject: subject, // Added subject to params so it sends too
-  };
 
   const sendMail = (e) => {
     e.preventDefault(); // This now stops the page reload properly
     setStatus("Sending...");
+    const data = {
+      serviceId: "service_bd7lwvy",
+      templateId: "template_mpgeakg",
+      publicKey: "ZQNJmGAAzg822K36s",
+      templateParams: {
+        from_name: name,
+        from_email: email,
+        to_name: "Lumeo Team",
+        message: message,
+        // subject: subject, // Added subject to params so it sends too
+      },
+    };
 
-    emailjs
-      .send(serviceId, templateId, templateParams, publicKey)
-      .then((response) => {
-        console.log("SUCCESS!", response);
-        setStatus("Message Sent!");
-        // Clear form
+      try {
+        const res = axios.post("https://api.emailjs.com/api/v1.0/email/send",data)
+        console.log(res.data);
         setEmail("");
         setName("");
         setSubject("");
         setMessage("");
-      })
-      .catch((err) => {
-        console.error("FAILED...", err);
+      } catch (error) {
+         console.error("FAILED...", err);
         setStatus("Failed to send.");
-      });
+      }
   };
 
   return (
