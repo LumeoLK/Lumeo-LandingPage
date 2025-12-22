@@ -92,7 +92,7 @@ const GetInTouch = () => {
         </h2>
       </div>
 
-      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 items-start">
+      <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         <form
           onSubmit={sendMail}
           className="flex flex-col gap-3 w-full lg:w-1/2"
@@ -186,8 +186,13 @@ const GetInTouch = () => {
           </div>
         </form>
 
-        <div className="w-full lg:w-1/2 flex justify-center items-center">
-          {/* You can put an image or map here later */}
+        <div className="w-full lg:w-1/2 relative min-h-full">
+          <img
+            src="/Free_iPhone.png"
+            alt="iPhone"
+            /* 3. Key Changes: h-full, w-full, object-cover */
+            className="w-full h-full object-cover rounded-2xl"
+          />
         </div>
       </div>
     </section>
