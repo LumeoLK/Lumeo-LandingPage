@@ -31,39 +31,27 @@ const Home = () => {
 
       <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
         {/* HERO */}
-        <section className="h-screen w-full snap-start snap-always relative">
           <Hero />
-        </section>
 
         {/* PROBLEM - (This is the component we fixed earlier) */}
-        <section className="h-screen w-full snap-start snap-always bg-[#f5f5f5]">
           <Problem />
-        </section>
 
         {/* FEATURE SECTION - Note: No 'h-screen' here. We let the child define the height. */}
-        <section className="w-full snap-start snap-always bg-white">
           <FeaturesScroll />
-        </section>
 
         {/* HOW IT WORKS - Keep this as h-screen if it's a static slide */}
-        <section className="h-screen w-full snap-start snap-always bg-[#dbdbdb]">
           <HowItWorks />
-        </section>
 
         {/* TEAM SECTION */}
-        <section className="h-screen w-full snap-start snap-always bg-neutral-950">
           <Team />
-        </section>
         {/* GET IN TOUCH */}
-        <section className="h-screen w-full snap-start snap-always bg-[#f5f5f5]">
-          <GetInTouch />
-        </section>
 
-        <section className="w-full snap-start snap-always bg-[#dbdbdb] flex items-end">
+          <GetInTouch />
+
           <div className="w-full">
             <Footer />
           </div>
-        </section>
+          
       </div>
     </>
   );
