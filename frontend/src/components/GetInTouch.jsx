@@ -82,15 +82,9 @@ const GetInTouch = () => {
   };
 
   return (
-    <section id="Reachus" className="bg-[#dbdbdb] py-20 px-6 lg:px-20 relative">
+    <section id="Reachus" className="bg-[#dbdbdb] pt-35 pb-20 px-6 lg:px-20 relative">
       {/* REQUIRED: This renders the toast notifications */}
       <Toaster position="top-center" richColors />
-
-      <div className="max-w-6xl mx-auto mb-5 text-center mt-11">
-        <h2 className="text-6xl lg:text-6xl font-[Anton] text-[#717171]">
-          GET IN TOUCH
-        </h2>
-      </div>
 
       <div className="max-w-6xl mx-auto flex flex-col lg:flex-row gap-10 items-stretch">
         <form
@@ -114,8 +108,14 @@ const GetInTouch = () => {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   disabled={isSubmitting || isSuccess}
-                  className="!bg-[#ffffff] text-[#484546] border-[#e9e9e9] placeholder-gray-400"
+                  className="
+                    [&_input]:bg-[#f4f3f4]
+                    [&_input]:text-[#484546]
+                    [&_input]:border-[#e9e9e9]
+                    [&_input::placeholder]:text-gray-400
+                  "
                 />
+
               </div>
 
               <div>
@@ -133,7 +133,12 @@ const GetInTouch = () => {
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   disabled={isSubmitting || isSuccess}
-                  className="!bg-[#ffffff] text-[#484546] !border-[#e9e9e9] placeholder-gray-400"
+                  className="
+                    [&_input]:bg-[#f4f3f4]
+                    [&_input]:text-[#484546]
+                    [&_input]:border-[#e9e9e9]
+                    [&_input::placeholder]:text-gray-400
+                  "
                 />
               </div>
             </div>
@@ -154,7 +159,12 @@ const GetInTouch = () => {
               value={subject}
               onChange={(e) => setSubject(e.target.value)}
               disabled={isSubmitting || isSuccess}
-              className="bg-white text-[#484546] border-gray-200 placeholder-gray-400"
+              className="
+                    [&_input]:bg-[#f4f3f4]
+                    [&_input]:text-[#484546]
+                    [&_input]:border-[#e9e9e9]
+                    [&_input::placeholder]:text-gray-400
+                  "
             />
           </div>
 
@@ -174,11 +184,16 @@ const GetInTouch = () => {
               value={message}
               onChange={(e) => setMessage(e.target.value)}
               disabled={isSubmitting || isSuccess}
-              className="!bg-[#ffffff] text-[#484546] !border-[#e9e9e9] placeholder-gray-400"
+              style={{
+                backgroundColor: "#f4f3f4",
+                color: "#484546",
+              }}
+              className="!border-[#e9e9e9] placeholder-gray-400"
             />
 
+
             {/* REPLACED Flowbite Button with LiquidButton */}
-            <div className="mt-2">
+            <div className=" flex justify-center">
               <LiquidButton isSubmitting={isSubmitting} isSuccess={isSuccess}>
                 SUBMIT MESSAGE
               </LiquidButton>

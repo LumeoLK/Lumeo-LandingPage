@@ -10,7 +10,16 @@ export const LiquidButton = ({
     <button
       type="submit"
       disabled={isSubmitting || isSuccess}
-      className={`relative w-full overflow-hidden rounded-lg bg-[#231f20] px-6 py-4 font-bold text-white transition-all hover:bg-[#332f30] disabled:cursor-not-allowed ${className}`}
+      className={`
+              inline-block mt-3 w-full py-2
+              border-1 border-[#231f20]
+              font-[Anton] text-2xl uppercase
+              text-[#231f20]
+              relative overflow-hidden group
+              transition-[border-color,color] duration-300
+              rounded-[5px]
+              hover:border-[#fbb040]
+            " ${className}`}
     >
       {/* 1. The Liquid Fill Layer (Your Brand Orange) */}
       <AnimatePresence>
