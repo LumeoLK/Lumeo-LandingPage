@@ -28,7 +28,7 @@ const Home = () => {
         - snap-y snap-mandatory: Enables the locking physics
         - scroll-smooth: smooths out anchor links
       */}
-     
+
       <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
         {/* HERO */}
         <section className="h-screen w-full snap-start snap-always relative">
@@ -40,30 +40,24 @@ const Home = () => {
           <Problem />
         </section>
 
-        {/* FEATURES */}
-        <section className="h-screen w-full snap-start snap-always bg-white">
+        {/* FEATURE SECTION - Note: No 'h-screen' here. We let the child define the height. */}
+        <section className="w-full snap-start snap-always bg-white">
           <FeaturesScroll />
         </section>
 
-        {/* HOW IT WORKS */}
+        {/* HOW IT WORKS - Keep this as h-screen if it's a static slide */}
         <section className="h-screen w-full snap-start snap-always bg-[#dbdbdb]">
           <HowItWorks />
         </section>
 
-        {/* ABOUT */}
-        <section className="h-screen w-full snap-start snap-always bg-white">
-          <AboutScroll />
-        </section>
         {/* TEAM SECTION */}
-<section className="h-screen w-full snap-start snap-always bg-neutral-950">
-  <Team />
-</section>
+        <section className="h-screen w-full snap-start snap-always bg-neutral-950">
+          <Team />
+        </section>
         {/* GET IN TOUCH */}
         <section className="h-screen w-full snap-start snap-always bg-[#f5f5f5]">
           <GetInTouch />
         </section>
-
-
 
         <section className="w-full snap-start snap-always bg-[#dbdbdb] flex items-end">
           <div className="w-full">
