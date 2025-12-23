@@ -54,16 +54,16 @@ const Home = () => {
         <section className="h-screen w-full snap-start snap-always bg-white">
           <AboutScroll />
         </section>
-
+        {/* TEAM SECTION */}
+<section className="h-screen w-full snap-start snap-always bg-neutral-950">
+  <Team />
+</section>
         {/* GET IN TOUCH */}
         <section className="h-screen w-full snap-start snap-always bg-[#f5f5f5]">
           <GetInTouch />
         </section>
 
-        {/* TEAM SECTION */}
-<section className="h-screen w-full snap-start snap-always bg-neutral-950">
-  <Team />
-</section>
+
 
         <section className="w-full snap-start snap-always bg-[#dbdbdb] flex items-end">
           <div className="w-full">

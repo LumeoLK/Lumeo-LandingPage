@@ -5,45 +5,45 @@ import { motion } from "framer-motion";
 const teamMembers = [
   {
     id: 1,
-    name: "ALEX VANCE",
+    name: "Vinuka Jayavihan",
     role: "FOUNDER",
     code: "AX-01",
-    img: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=800&fit=crop",
+    img: "src/assets/vinuka.jpg",
   },
   {
     id: 2,
-    name: "SARAH JENKINS",
+    name: "Samindi Liyanage",
     role: "PRODUCT",
     code: "SR-88",
-    img: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=600&h=800&fit=crop",
+    img: "src/assets/umesha.jpg",
   },
   {
     id: 3,
-    name: "DAVID KANG",
+    name: "Pulina Pasan",
     role: "ENGINEER",
     code: "DK-92",
-    img: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&h=800&fit=crop",
+    img: "src/assets/pulina.jpg",
   },
   {
     id: 4,
-    name: "EMILY ROSS",
+    name: "Induwara Dilshan",
     role: "DESIGNER",
     code: "ER-04",
-    img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=600&h=800&fit=crop",
+    img: "src/assets/induwara.jpeg",
   },
   {
     id: 5,
-    name: "MICHAEL T.",
+    name: "Mayura Thayalan",
     role: "MARKETING",
     code: "MT-05",
-    img: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&h=800&fit=crop",
+    img: "src/assets/mayura.jpeg",
   },
   {
     id: 6,
-    name: "LINDA WU",
+    name: "Maneth Kaveen",
     role: "OPS LEAD",
     code: "LW-06",
-    img: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=600&h=800&fit=crop",
+    img: "src/assets/maneth.jpg",
   },
 ];
 
@@ -62,13 +62,20 @@ const RandomData = () => {
 const ScannerCard = ({ member }) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  // LOGIC: Split the name into First and Last
+  const nameParts = member.name.split(" ");
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(" "); // Joins the rest if there are middle names
+
   return (
     <div
       className="relative w-[280px] md:w-[320px] h-[500px] bg-neutral-900 overflow-hidden cursor-crosshair border border-neutral-800 group flex-shrink-0 select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* LAYER 1: BLUEPRINT */}
+      {/* ... [LAYER 1, 2, 3 remain exactly the same] ... */}
+
+      {/* LAYER 1: BLUEPRINT (Included here just to confirm the gradient fix from previous step) */}
       <div className="absolute inset-0 z-0 pointer-events-none">
         <img
           src={member.img}
@@ -76,12 +83,15 @@ const ScannerCard = ({ member }) => {
           className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105 pointer-events-none"
           style={{
             filter:
-              "grayscale(100%) sepia(100%) hue-rotate(170deg) saturate(4) brightness(0.6) contrast(1.2)",
+              "grayscale(100%) sepia(25%) hue-rotate(360deg) saturate(1) brightness(-.95) contrast(1.2)",
           }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(13,13,13,0)_1px,transparent_1px),linear-gradient(90deg,rgba(13,13,13,0)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
+        {/* The Gradient Overlay you asked for earlier */}
+        {/* <div className="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div> */}
       </div>
 
+      {/* LAYER 2 & 3 hidden for brevity, keep them as is */}
       {/* LAYER 2: REALITY */}
       <motion.div
         initial={{ clipPath: "inset(0 0 100% 0)" }}
@@ -107,7 +117,7 @@ const ScannerCard = ({ member }) => {
         className="absolute left-0 right-0 h-[2px] z-20 bg-[#fbb040] shadow-[0_0_20px_#fbb040] pointer-events-none"
       />
 
-      {/* LAYER 4: HUD */}
+      {/* LAYER 4: HUD - UPDATED FOR NAME SPLIT */}
       <div className="absolute inset-0 z-30 p-5 flex flex-col justify-between pointer-events-none">
         <div className="flex justify-between items-start">
           <div className="flex flex-col gap-1">
@@ -118,15 +128,24 @@ const ScannerCard = ({ member }) => {
           </div>
         </div>
 
-        <div>
-          <h3
-            className={`text-3xl font-[Anton] text-white uppercase tracking-wider transition-transform duration-500 ${
+        <div className="flex flex-col items-center w-full">
+          <div
+            className={`flex flex-col items-center transition-transform duration-500 ${
               isHovered ? "translate-y-0" : "translate-y-full"
             }`}
           >
-            {member.name}
-          </h3>
-          <div className="flex items-center gap-4 mt-2">
+            {/* FIRST NAME: Bigger, Anton Font */}
+            <h3 className="text-4xl md:text-5xl font-[Anton] text-white uppercase tracking-wider text-center leading-[0.9]">
+              {firstName}
+            </h3>
+
+            {/* LAST NAME: Smaller, Calibri-like Font (sans-serif), below first name */}
+            <p className="text-white/80 text-sm md:text-base font-sans font-light tracking-wide mt-1 uppercase">
+              {lastName}
+            </p>
+          </div>
+
+          <div className="flex items-center justify-center gap-4 mt-3">
             <p
               className={`text-[#fbb040] font-mono text-xs tracking-widest transition-opacity duration-500 ${
                 isHovered ? "opacity-100" : "opacity-0"
@@ -143,7 +162,8 @@ const ScannerCard = ({ member }) => {
 };
 
 const TeamScanner = () => {
-  const carouselRef = useRef(null);
+  // We double the array to ensure smooth looping
+  const infiniteMembers = [...teamMembers, ...teamMembers];
 
   return (
     <div className="w-full h-full bg-black flex flex-col justify-center relative overflow-hidden">
@@ -156,7 +176,7 @@ const TeamScanner = () => {
         }}
       ></div>
 
-      <div className="w-full px-8 relative z-10 flex flex-col h-full justify-center">
+      <div className="w-full relative z-10 flex flex-col h-full justify-center">
         {/* Header */}
         <div className="flex items-end justify-between border-b border-white/10 pb-4 mb-8 mx-auto w-full max-w-[90%]">
           <div>
@@ -172,31 +192,44 @@ const TeamScanner = () => {
           </div>
           <div className="text-right hidden md:block">
             <p className="text-[#fbb040] font-mono text-xs">
-              DRAG TO NAVIGATE &lt; &gt;
+              SYSTEM STATUS: ONLINE
             </p>
           </div>
         </div>
 
-        {/* DRAGGABLE CAROUSEL AREA */}
-        <div
-          ref={carouselRef}
-          className="w-full overflow-hidden cursor-grab active:cursor-grabbing"
-        >
-          <motion.div
-            className="flex gap-6 px-[5%] w-max"
-            drag="x"
-            dragConstraints={carouselRef}
-            // dragElastic={0.1} adds a nice rubber band effect at the edges
-            dragElastic={0.1}
-          >
-            {teamMembers.map((member) => (
-              <ScannerCard key={member.id} member={member} />
+        {/* CSS KEYFRAMES FOR SCROLL 
+            We inject this style locally to keep the component self-contained.
+        */}
+        <style jsx>{`
+          @keyframes scroll-left {
+            0% {
+              transform: translateX(0);
+            }
+            100% {
+              transform: translateX(-50%);
+            }
+          }
+
+          .animate-scroll {
+            animation: scroll-left 30s linear infinite; /* Adjust '30s' to change speed */
+          }
+
+          /* THE MAGIC LINE: Pauses animation on hover */
+          .animate-scroll:hover {
+            animation-play-state: paused;
+          }
+        `}</style>
+
+        {/* INFINITE SCROLL AREA */}
+        <div className="w-full overflow-hidden flex relative [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+          <div className="flex gap-6 w-max animate-scroll">
+            {infiniteMembers.map((member, index) => (
+              <ScannerCard key={`${member.id}-${index}`} member={member} />
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
-
 export default TeamScanner;
