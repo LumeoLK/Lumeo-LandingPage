@@ -83,7 +83,7 @@ const ScannerCard = ({ member }) => {
           className="w-full h-full object-cover opacity-60 transition-transform duration-700 group-hover:scale-105 pointer-events-none"
           style={{
             filter:
-              "grayscale(100%) sepia(25%) hue-rotate(360deg) saturate(1) brightness(-.95) contrast(1.2)",
+              "grayscale(100%) sepia(25%) hue-rotate(360deg) saturate(1) brightness(0.95) contrast(1.2)",
           }}
         />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(13,13,13,0)_1px,transparent_1px),linear-gradient(90deg,rgba(13,13,13,0)_1px,transparent_1px)] bg-[size:40px_40px] opacity-20"></div>
