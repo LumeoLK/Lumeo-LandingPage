@@ -1,96 +1,77 @@
-import React, { useRef, useLayoutEffect } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import React, { useRef, Suspense, use } from "react";
+import { Canvas, useFrame } from "@react-three/fiber"; // Import useFrame
+import { Environment, ScrollControls, useScroll, useTexture } from "@react-three/drei"; // Import ScrollControls & useScroll
+import { Model } from "./Iphone.jsx";
+import * as THREE from 'three'
 
-gsap.registerPlugin(ScrollTrigger);
+function Experience() {
+  const leftImgRef = useRef();
+  const rightImgRef = useRef();
+  
+  // This hook gives us data about the scroll (0 = top, 1 = bottom)
+  const scroll = useScroll();
+const texture = useTexture('/public/ai-chip-artificial-intelligence-future-technology-innovation.jpg')
+const text2=useTexture('public/Augmented-REality-adalah-1.jpg')
+  // useFrame runs 60 times per second (like a game loop)
+  useFrame(() => {
+    // scroll.offset is a number between 0 and 1
+    // We want the images to start at 0 (center) and move to 12 (sides)
+    
+    // Left Image: Moves from 0 to -12
+    if (leftImgRef.current) {
+        leftImgRef.current.position.x = -THREE.MathUtils.lerp(0, 12, scroll.offset);
+    }
 
-const FeaturesScroll = () => {
-  const containerRef = useRef(null);
-  const stickyRef = useRef(null); // The part that stays visible
-  const textRef = useRef(null);
-  const cardRef = useRef(null);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      // 1. MARQUEE (Runs infinitely)
-      gsap.to(textRef.current, {
-        xPercent: -50,
-        ease: "none",
-        duration: 10,
-        repeat: -1,
-      });
-
-      // 2. SCROLL & EXPAND ANIMATION
-      const tl = gsap.timeline({
-        scrollTrigger: {
-          trigger: containerRef.current, // The tall 300vh container
-          start: "top top", // Start when top hits top of viewport
-          end: "bottom bottom", // End when we hit the bottom of 300vh
-          scrub: 1, // Smooth scrubbing
-          pin: stickyRef.current, // Pin the VISIBLE wrapper, not the whole container
-          pinSpacing: false, // Important when managing your own height
-        },
-      });
-
-      // The Animation: Card grows to full screen
-      tl.to(cardRef.current, {
-        width: "100vw",
-        height: "100vh",
-        borderRadius: "0px",
-        ease: "power1.inOut", // Linear feel works best for scroll sync
-      });
-    }, containerRef);
-
-    return () => ctx.revert();
-  }, []);
+    // Right Image: Moves from 0 to 12
+    if (rightImgRef.current) {
+        rightImgRef.current.position.x = THREE.MathUtils.lerp(0, 12, scroll.offset);
+    }
+  });
 
   return (
-    // THE TRACK: This div is 300vh tall.
-    // This allows the user to "scroll" for a while without leaving the section.
-    <div ref={containerRef} className="relative w-full h-[300vh] bg-[#fbb040]">
-      {/* THE STICKY VIEWPORT: This stays locked at 100vh while we scroll the track */}
-      <div
-        ref={stickyRef}
-        className="h-screen w-full overflow-hidden flex items-center justify-center relative"
-      >
-        {/* Background Marquee */}
-        <div className="absolute inset-0 flex items-center justify-start opacity-20 pointer-events-none select-none">
-          <div ref={textRef} className="whitespace-nowrap flex gap-10">
-            <h1 className="text-[25vw] font-[Anton] leading-none text-black uppercase">
-              LUMEO — AR — LUMEO — AR —
-            </h1>
-            <h1 className="text-[25vw] font-[Anton] leading-none text-black uppercase">
-              LUMEO — AR — LUMEO — AR —
-            </h1>
-          </div>
-        </div>
+    <>
+      <ambientLight intensity={0.5} />
+      <directionalLight position={[10, 10, 5]} intensity={1} />
 
-        {/* The Expanding Card */}
-        <div
-          ref={cardRef}
-          className="relative z-10 overflow-hidden bg-black shadow-2xl"
-          style={{
-            width: "300px",
-            height: "400px",
-            borderRadius: "24px",
-            maxWidth: "90%",
-            maxHeight: "80%",
-          }}
-        >
-          <img
-            src="public/assets/vinuka.jpg" // Use your AR image here
-            alt="Feature Preview"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <h2 className="text-white font-[Anton] text-4xl mix-blend-difference">
-              THE FUTURE
-            </h2>
-          </div>
-        </div>
-      </div>
+      {/* The iPhone */}
+      <Suspense fallback={null}>
+        <Model
+          position={[0, -1, 0]}
+          scale={80}
+          rotation={[0, Math.PI / 0.5, 0]}
+        />
+      </Suspense>
+
+      {/* Left Image (Blue) */}
+      <mesh ref={leftImgRef} position={[0, 0, -5]} scale={[8, 14, 1]}>
+        <planeGeometry />
+        <meshBasicMaterial map={texture} />
+      </mesh>
+
+      {/* Right Image (Pink) */}
+      <mesh ref={rightImgRef} position={[0, 0, -5]} scale={[8, 14, 1]}>
+        <planeGeometry />
+        <meshBasicMaterial map={text2} />
+      </mesh>
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    // Clean Container - No "fixed" hacks needed
+    <div style={{ width: "100vw", height: "100vh" }}>
+      <Canvas camera={{ position: [0, 0, 35], fov: 50 }}>
+        
+        {/* ScrollControls handles the scrolling logic for us. 
+            pages={3} means the scroll height is 300vh.
+            damping={0.2} adds the smooth "weight" to the scroll. 
+        */}
+        <ScrollControls pages={3} damping={0.2}>
+          <Experience />
+        </ScrollControls>
+        
+      </Canvas>
     </div>
   );
-};
-
-export default FeaturesScroll;
+}

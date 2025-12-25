@@ -27,7 +27,6 @@
   display: none;
 }
 
-
 /* This ensures the scroll container handles the snapping, not the body */
 html,
 body {
