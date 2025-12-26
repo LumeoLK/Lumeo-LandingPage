@@ -37,7 +37,7 @@ const Home = () => {
           <Problem />
 
         {/* FEATURE SECTION - Note: No 'h-screen' here. We let the child define the height. */}
-          {/* <FeaturesScroll /> */}
+          <FeaturesScroll />
 
         {/* HOW IT WORKS - Keep this as h-screen if it's a static slide */}
           <HowItWorks />
