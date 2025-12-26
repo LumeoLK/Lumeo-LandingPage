@@ -1,5 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
 
 /* ================= TEAM DATA ================= */
 const teamMembers = [
@@ -47,31 +51,39 @@ const teamMembers = [
   },
 ];
 
-/* ================= RANDOM HUD DATA ================= */
-const RandomData = () => {
-  const [num, setNum] = useState("00.00");
-
-  useEffect(() => {
-    const i = setInterval(
-      () => setNum((Math.random() * 100).toFixed(2)),
-      150
-    );
-    return () => clearInterval(i);
-  }, []);
-
-  return <span className="font-mono text-xs text-[#fbb040]">{num}</span>;
+/* ================= FLOATING BACKGROUND TEXT ================= */
+const FloatingLumeoText = () => {
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none">
+      <div className="animate-scroll-left whitespace-nowrap text-[20vw] font-bold text-white/10 leading-none py-8">
+        LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO
+      </div>
+      <div className="animate-scroll-left-delayed whitespace-nowrap text-[20vw] font-bold text-white/10 leading-none py-8 -mt-4">
+        LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO
+      </div>
+      <div className="animate-scroll-left whitespace-nowrap text-[20vw] font-bold text-white/10 leading-none py-8 -mt-4">
+        LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO LUMEO
+      </div>
+    </div>
+  );
 };
 
 /* ================= CARD ================= */
-const ScannerCard = ({ member }) => {
+const ScannerCard = ({ member, index }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const cardRef = useRef(null);
 
   const nameParts = member.name.split(" ");
   const firstName = nameParts[0];
   const lastName = nameParts.slice(1).join(" ");
 
   return (
-    <div
+    <motion.div
+      ref={cardRef}
+      initial={{ opacity: 0, y: 150 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.8, delay: index * 0.15, ease: "easeOut" }}
       className="relative w-[280px] md:w-[320px] h-[500px] bg-neutral-900 overflow-hidden border border-neutral-800 cursor-crosshair flex-shrink-0 group select-none"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -134,7 +146,7 @@ const ScannerCard = ({ member }) => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          <h3 className="text-4xl md:text-5xl font-[Anton] text-white uppercase leading-[0.9]">
+          <h3 className="text-4xl md:text-5xl font-bold text-white uppercase leading-[0.9]">
             {firstName}
           </h3>
           <p className="text-white/80 text-sm uppercase tracking-wide mt-1">
@@ -142,64 +154,134 @@ const ScannerCard = ({ member }) => {
           </p>
         </motion.div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
-/* ================= MAIN SECTION ================= */
-const TeamScanner = () => {
+/* ================= MAIN COMPONENT ================= */
+const Team = () => {
+  const containerRef = useRef(null);
+  const titleRef = useRef(null);
+  const bgRef = useRef(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      // Title animation on scroll
+      gsap.to(titleRef.current, {
+        scale: 0.4,
+        y: -300,
+        opacity: 0.7,
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "50% top",
+          scrub: 1.5,
+        },
+      });
+
+      // Background blur on scroll
+      gsap.to(bgRef.current, {
+        filter: "blur(8px)",
+        ease: "none",
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: "top top",
+          end: "50% top",
+          scrub: 1.5,
+        },
+      });
+    });
+
+    return () => ctx.revert();
+  }, []);
+
   const infiniteMembers = [...teamMembers, ...teamMembers];
 
   return (
-    <div className="w-full min-h-screen bg-black relative overflow-hidden flex items-center">
-      {/* BACKGROUND GRID */}
-      <div
-        className="absolute inset-0 opacity-20"
-        style={{
-          backgroundImage:
-            "linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)",
-          backgroundSize: "50px 50px",
-        }}
-      />
+    <div ref={containerRef} className="relative bg-black overflow-hidden">
+      <style jsx>{`
+        @keyframes scroll-left {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        @keyframes scroll-left-delayed {
+          from {
+            transform: translateX(-25%);
+          }
+          to {
+            transform: translateX(-75%);
+          }
+        }
+        .animate-scroll-left {
+          animation: scroll-left 40s linear infinite;
+        }
+        .animate-scroll-left-delayed {
+          animation: scroll-left-delayed 40s linear infinite;
+        }
+        @keyframes scroll {
+          from {
+            transform: translateX(0);
+          }
+          to {
+            transform: translateX(-50%);
+          }
+        }
+        .scroll {
+          animation: scroll 30s linear infinite;
+        }
+        .scroll:hover {
+          animation-play-state: paused;
+        }
+      `}</style>
 
-      <div className="relative z-10 w-full">
-        {/* HEADER */}
-        <div className="flex justify-between items-end max-w-[90%] mx-auto mb-8 border-b border-white/10 pb-4">
-          <h2 className="text-white text-[3rem] md:text-[4rem] font-[Anton] leading-none">
-            THE <span className="stroke-text">OPERATORS</span>
-          </h2>
-          <p className="hidden md:block text-[#fbb040] font-mono text-xs">
-            SYSTEM STATUS: ONLINE
-          </p>
+      {/* Background LUMEO Text - Only for this section */}
+      <div ref={bgRef} className="absolute inset-0 z-0">
+        <FloatingLumeoText />
+      </div>
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-[1] pointer-events-none" />
+
+      {/* Content Container */}
+      <div className="relative z-10">
+        {/* Hero Title - Transforms on Scroll */}
+        <div className="h-screen flex items-center justify-center">
+          <div ref={titleRef} className="text-center px-6">
+            <h1 className="text-8xl md:text-[12rem] lg:text-[14rem] font-bold text-white uppercase tracking-tight leading-none">
+              Meet the <span className="text-[#fbb040]">Team</span>
+            </h1>
+            <p className="text-white/60 text-xl md:text-2xl mt-8 font-light tracking-wide">
+              The minds behind the innovation
+            </p>
+          </div>
         </div>
 
-        <style jsx>{`
-          .stroke-text {
-            -webkit-text-stroke: 1px white;
-            color: transparent;
-          }
-          @keyframes scroll {
-            from {
-              transform: translateX(0);
-            }
-            to {
-              transform: translateX(-50%);
-            }
-          }
-          .scroll {
-            animation: scroll 30s linear infinite;
-          }
-          .scroll:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
+        {/* Team Cards Section */}
+        <div className="relative bg-black pb-20 pt-10">
+          {/* Grid Background */}
+          <div
+            className="absolute inset-0 opacity-20"
+            style={{
+              backgroundImage:
+                "linear-gradient(#333 1px, transparent 1px), linear-gradient(90deg, #333 1px, transparent 1px)",
+              backgroundSize: "50px 50px",
+            }}
+          />
 
-        {/* SCROLL */}
-        <div className="overflow-hidden w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
-          <div className="flex gap-6 w-max scroll px-6">
-            {infiniteMembers.map((m, i) => (
-              <ScannerCard key={`${m.id}-${i}`} member={m} />
-            ))}
+          <div className="relative z-10 w-full">
+            {/* Scrolling Cards */}
+            <div className="overflow-hidden w-full [mask-image:linear-gradient(to_right,transparent,black_10%,black_90%,transparent)]">
+              <div className="flex gap-6 w-max scroll px-6">
+                {infiniteMembers.map((m, i) => (
+                  <ScannerCard key={`${m.id}-${i}`} member={m} index={i % teamMembers.length} />
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -207,4 +289,4 @@ const TeamScanner = () => {
   );
 };
 
-export default TeamScanner;
+export default Team;
