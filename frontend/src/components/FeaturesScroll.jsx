@@ -67,8 +67,8 @@ function Experience() {
     // We want to move the camera slightly based on mouse position.
     // If mouse goes right (+), Camera goes right (+), so object looks like it goes left.
 
-    const parallaxSpeed = 2; // How much the camera moves
-    const smoothing = 2 * delta; // Make the movement smooth
+    const parallaxSpeed = 6; // How much the camera moves
+    const smoothing = 4 * delta; // Make the movement smooth
 
     // Calculate target position based on mouse
     // We keep Z at 35 (your initial camera pos), change X and Y
