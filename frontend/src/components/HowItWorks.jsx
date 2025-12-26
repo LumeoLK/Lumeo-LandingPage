@@ -1,50 +1,347 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
+import { useRef, useState, useEffect } from "react";
 
 const steps = [
-  { step: "01", title: "Scan Your Space", desc: "Use your phone to capture your room dimensions." },
-  { step: "02", title: "Place & Compare", desc: "Drop furniture into your space and compare instantly." },
-  { step: "03", title: "Buy with Confidence", desc: "What you see is exactly what you get." },
+  {
+    step: "01",
+    title: "YOUR SPACE BECOMES DIGITAL",
+    subtitle: "Instant Room Intelligence",
+    desc: "Point your phone. Our AI sees what you see — every wall, every corner, every beam of light. In seconds, your physical space transforms into a precise digital canvas.",
+    image: "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800&q=80",
+    color: "from-[#fbb040] to-[#f7931e]",
+  },
+  {
+    step: "02",
+    title: "FURNITURE COMES TO LIFE",
+    subtitle: "Pixel-Perfect AR Placement",
+    desc: "Watch as furniture materializes in your room. Not as a guess. Not as a sketch. But as a perfect 1:1 replica — scaled, shadowed, and styled exactly as it would exist in reality.",
+    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+    color: "from-[#f7931e] to-[#fbb040]",
+  },
+  {
+    step: "03",
+    title: "SEE YOUR FUTURE HOME",
+    subtitle: "Zero Uncertainty Shopping",
+    desc: "Walk around it. Study it from every angle. Change the color. Swap the style. This is your space, your furniture, your decision — made with complete clarity.",
+    image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
+    color: "from-[#fbb040] to-[#f7931e]",
+  },
+  {
+    step: "04",
+    title: "BUY WITH CONFIDENT",
+    subtitle: "No Regrets, Just Results",
+    desc: "No more measuring tape anxiety. No more \"will it fit?\" doubts. No more costly returns. Just perfect purchases, every time.",
+    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&q=80",
+    color: "from-[#f7931e] to-[#fbb040]",
+  },
 ];
 
 export default function HowItWorks() {
   return (
-    <section className="bg-[#dbdbdb] px-24 py-32">
-      <motion.h2
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-        className="font-[Anton] text-[4rem] md:text-[5rem] text-[#231f20] mb-20"
-      >
-        How LUMEO Works
-      </motion.h2>
+    <div className="bg-[#0a0a0a]">
+      <HeroSection />
+      {steps.map((step, i) => (
+        <StoryStep key={i} step={step} index={i} total={steps.length} />
+      ))}
+      <ClosingSection />
+    </div>
+  );
+}
 
-      <div className="space-y-24">
-        {steps.map((s, i) => (
+function HeroSection() {
+  const ref = useRef(null);
+  const [mousePos, setMousePos] = useState({ x: -100, y: -100 }); // initial off-screen
+
+  useEffect(() => {
+    const handleMouseMove = (e) => {
+      const rect = ref.current.getBoundingClientRect();
+      setMousePos({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    };
+
+    const node = ref.current;
+    node.addEventListener("mousemove", handleMouseMove);
+    return () => node.removeEventListener("mousemove", handleMouseMove);
+  }, []);
+
+  return (
+    <section
+      ref={ref}
+      className="relative h-screen flex items-center justify-center overflow-hidden"
+    >
+      {/* Animated mesh gradient */}
+      <div className="absolute inset-0">
+        <motion.div
+          className="absolute inset-0 opacity-30"
+          style={{
+            background: `
+              radial-gradient(at 27% 37%, rgba(251, 176, 64, 0.3) 0px, transparent 50%),
+              radial-gradient(at 97% 21%, rgba(247, 147, 30, 0.2) 0px, transparent 50%),
+              radial-gradient(at 52% 99%, rgba(251, 176, 64, 0.2) 0px, transparent 50%),
+              radial-gradient(at 10% 29%, rgba(247, 147, 30, 0.3) 0px, transparent 50%)
+            `,
+          }}
+          animate={{
+            scale: [1, 1.2, 1],
+            rotate: [0, 90, 0],
+          }}
+          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        />
+      </div>
+
+      {/* Grid overlay with mouse highlight */}
+      <div
+        className="absolute inset-0 opacity-20 pointer-events-none"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(251, 176, 64, 0.1) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(251, 176, 64, 0.1) 1px, transparent 1px),
+            radial-gradient(circle 60px at ${mousePos.x}px ${mousePos.y}px, rgba(251, 176, 64, 0.25), transparent 70%)
+          `,
+          backgroundSize: "50px 50px",
+        }}
+      />
+
+      <div className="relative z-10 text-center px-6 max-w-6xl">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1.5 }}
+        >
+          <motion.h1
+            className="text-6xl md:text-8xl lg:text-9xl font-black leading-none"
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1.2, delay: 0.3, ease: [0.6, 0.05, 0.01, 0.9] }}
+          >
+            <span className="block text-transparent bg-clip-text bg-gradient-to-r from-[#fbb040] via-[#f7931e] to-[#fbb040]">
+              HOW
+            </span>
+            <span className="block text-white">IT WORKS</span>
+          </motion.h1>
+
+          <motion.div
+            className="mt-12 h-px w-64 mx-auto bg-gradient-to-r from-transparent via-[#fbb040] to-transparent"
+            initial={{ scaleX: 0 }}
+            animate={{ scaleX: 1 }}
+            transition={{ duration: 1.5, delay: 0.8 }}
+          />
+
+          <motion.p
+            className="mt-12 text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto"
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, delay: 1 }}
+          >
+            Experience the future of spatial visualization
+          </motion.p>
+        </motion.div>
+      </div>
+    </section>
+  );
+}
+
+
+
+function StoryStep({ step, index, total }) {
+  const ref = useRef(null);
+  const isEven = index % 2 === 0;
+
+  return (
+    <section
+      ref={ref}
+      className="relative min-h-screen flex items-center py-32 px-6 bg-gradient-to-r from-[#0f0f0f] to-[#1a1a1a]"
+    >
+      <div className="relative z-10 max-w-7xl w-full mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
+        
+        {/* IMAGE SIDE */}
+        <motion.div
+          className={`order-1 ${isEven ? 'md:order-1' : 'md:order-2'}`}
+          initial={{ opacity: 0, x: isEven ? -100 : 100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <div className="relative group">
+            <div className="relative overflow-hidden rounded-lg">
+              <motion.img
+                src={step.image}
+                alt={step.title}
+                className="w-full h-[400px] md:h-[500px] object-cover rounded-lg"
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.6, ease: "easeOut" }}
+              />
+              <div className={`absolute inset-0 bg-gradient-to-br ${step.color} opacity-30 mix-blend-overlay`} />
+              <motion.div
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                style={{ boxShadow: '0 0 60px rgba(251, 176, 64, 0.7)' }}
+              />
+              {/* Floating particles */}
+              {[...Array(6)].map((_, i) => (
+                <motion.div
+                  key={i}
+                  className="absolute w-2 h-2 rounded-full bg-[#fbb040]"
+                  style={{
+                    top: `${20 + Math.random() * 60}%`,
+                    left: `${isEven ? -5 : 105}%`,
+                  }}
+                  animate={{
+                    y: [0, -15, 0],
+                    opacity: [0, 0.8, 0],
+                    scale: [0, 1, 0],
+                  }}
+                  transition={{
+                    duration: 2 + Math.random(),
+                    repeat: Infinity,
+                    delay: i * 0.3,
+                  }}
+                />
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* CONTENT SIDE */}
+        <motion.div
+          className={`order-2 ${isEven ? 'md:order-2' : 'md:order-1'}`}
+          initial={{ opacity: 0, x: isEven ? 100 : -100 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          {/* Step number */}
+          <motion.div
+            className="mb-6"
+            initial={{ opacity: 0, scale: 0.5 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <span className={`text-8xl md:text-9xl font-[Anton] leading-none text-transparent bg-clip-text bg-gradient-to-br ${step.color} `}>
+              {step.step}
+            </span>
+          </motion.div>
+
+          {/* Title */}
+          <motion.h2
+            className="text-4xl md:text-5xl lg:text-6xl font-[Anton] text-white leading-tight mb-4"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {step.title}
+          </motion.h2>
+
+          {/* Subtitle button */}
+          <motion.div
+            className={`inline-block px-6 py-3 bg-gradient-to-r ${step.color} mb-6`}
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            <p className="text-sm font-outfit text-black">
+              {step.subtitle}
+            </p>
+          </motion.div>
+
+          {/* Description */}
+          <motion.p
+            className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 font-outfit"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {step.desc}
+          </motion.p>
+
+          {/* Animated line */}
+          <motion.div
+            className="relative h-1 w-full bg-white/10 rounded-full overflow-hidden"
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            transition={{ duration: 1, delay: 0.4 }}
+            viewport={{ once: true, margin: "-100px" }}
+            style={{ transformOrigin: "left" }}
+          >
+            <motion.div
+              className={`absolute inset-0 bg-gradient-to-r ${step.color}`}
+              initial={{ x: "-100%" }}
+              whileInView={{ x: "0%" }}
+              transition={{ duration: 1.5, delay: 0.6 }}
+              viewport={{ once: true, margin: "-100px" }}
+            />
+          </motion.div>
+        </motion.div>
+      </div>
+
+      {/* Step progress dots */}
+      <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex gap-3">
+        {[...Array(total)].map((_, i) => (
           <motion.div
             key={i}
-            className="flex flex-col md:flex-row items-start md:items-center cursor-pointer group"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.7, delay: i * 0.4, type: "spring", stiffness: 120 }}
+            className={`rounded-sm transition-all duration-500 ${i === index ? `w-12 h-2 bg-gradient-to-r ${step.color}` : 'w-2 h-2 bg-white/20'}`}
+            initial={{ scale: 0 }}
+            whileInView={{ scale: 1 }}
+            transition={{ delay: i * 0.1 }}
             viewport={{ once: true }}
-          >
-            <motion.span
-              className="font-[Anton] text-[6rem] md:text-[7rem] text-[#fbb040] opacity-30 md:w-32 group-hover:text-[#ff9500] transition-colors duration-300"
-            >
-              {s.step}
-            </motion.span>
-            <motion.div
-              className="mt-4 md:mt-0 md:ml-8 max-w-xl"
-              whileHover={{ scale: 1.03 }}
-              transition={{ type: "spring", stiffness: 120 }}
-            >
-              <h3 className="font-[Anton] text-3xl md:text-4xl text-[#231f20] group-hover:text-[#fbb040] transition-colors duration-300">{s.title}</h3>
-              <p className="mt-2 text-gray-700 group-hover:text-gray-900 transition-colors duration-300">{s.desc}</p>
-            </motion.div>
-          </motion.div>
+          />
         ))}
       </div>
+    </section>
+  );
+}
+
+function ClosingSection() {
+  return (
+    <section className="relative h-[50vh] flex items-center justify-center px-6 overflow-visible">
+      
+      {/* LEFT → RIGHT GRADIENT BACKGROUND */}
+      <div className="absolute inset-0 bg-gradient-to-r from-[#e5e5e5] to-[#b9b9b9]" />
+
+      <motion.div
+        className="relative z-10 text-center max-w-7xl"
+        initial={{ opacity: 0, y: 80 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+        viewport={{ once: true, amount: 0.45 }}
+      >
+        {/* MAIN HEADING — ANTON (ALL CAPS) */}
+        <motion.h2
+          className="font-[Anton] text-6xl sm:text-7xl md:text-8xl leading-[0.95] text-[#636363]"
+          initial={{ letterSpacing: "0.35em", opacity: 0 }}
+          whileInView={{ letterSpacing: "0em", opacity: 1 }}
+          transition={{ duration: 1.2, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          BUILT FOR REAL SPACES
+        </motion.h2>
+
+        {/* SUPPORT TEXT — OUTFIT (paragraph style, light font) */}
+        <motion.p
+          className="mt-6 font-[Outfit] font-light text-xl sm:text-2xl md:text-3xl text-[#636363] max-w-3xl mx-auto leading-relaxed"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 0.5 }}
+          viewport={{ once: true }}
+        >
+          See scale. Feel proportion. Make decisions with clarity.
+        </motion.p>
+
+        {/* STRONG DIVIDER */}
+        <motion.div
+          className="mt-10 mx-auto h-[3px] w-48 bg-gradient-to-r from-[#636363] via-[#636363] to-[#636363]"
+          initial={{ scaleX: 0 }}
+          whileInView={{ scaleX: 1 }}
+          transition={{ duration: 1.2, delay: 0.8 }}
+          viewport={{ once: true }}
+          style={{ transformOrigin: "center" }}
+        />
+      </motion.div>
     </section>
   );
 }
