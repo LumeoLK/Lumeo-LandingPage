@@ -27,6 +27,7 @@
     "gsap": "^3.13.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "react-responsive": "^10.0.1",
     "react-router-dom": "^7.10.1",
     "react-three-fiber": "^6.0.13",
     "sonner": "^2.0.7",
