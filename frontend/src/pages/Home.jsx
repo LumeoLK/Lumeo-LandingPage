@@ -1,57 +1,72 @@
-import React from "react";
-import { motion } from "framer-motion";
-
+import React, { useRef } from "react";
 import Navbar from "../components/NavBar.jsx";
-import AutoHideNavbar from "../components/AutoHideNavbar.jsx"; // Assuming you use this or Navbar
 import Hero from "../components/Hero.jsx";
 import Problem from "../components/Problem.jsx";
 import FeaturesScroll from "../components/FeaturesScroll.jsx";
 import HowItWorks from "../components/HowItWorks.jsx";
-import AboutScroll from "../components/AboutScroll.jsx";
+import Team from "../components/Team.jsx";
 import GetInTouch from "../components/GetInTouch.jsx";
 import Footer from "../components/Footer.jsx";
-import Team from "../components/Team.jsx";
 
 const Home = () => {
+  const scrollContainerRef = useRef(null);
+
+  // Scroll to a section inside the scrollable container
+  const handleScroll = (id) => {
+    const container = scrollContainerRef.current;
+    const section = document.getElementById(id);
+    if (container && section) {
+      container.scrollTo({
+        top: section.offsetTop,
+        behavior: "smooth",
+      });
+    }
+  };
+
   return (
     <>
-      {/* Navbar must be Fixed or Absolute so it stays on top 
-         while the container behind it scrolls 
-      */}
+      {/* Fixed Navbar */}
       <div className="fixed top-0 left-0 w-full z-50">
-        <Navbar />
+        <Navbar handleScroll={handleScroll} />
       </div>
 
-      {/* MAIN SCROLL CONTAINER 
-        - h-screen: The window through which we see content
-        - overflow-y-scroll: Enables scrolling within this div
-        - snap-y snap-mandatory: Enables the locking physics
-        - scroll-smooth: smooths out anchor links
-      */}
-
-      <div className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth">
-        {/* HERO */}
+      {/* Scrollable Main Container */}
+      <div
+        ref={scrollContainerRef}
+        className="h-screen w-full overflow-y-scroll snap-y snap-mandatory scroll-smooth"
+      >
+        {/* Hero Section */}
+        <div id="Hero" className="snap-start">
           <Hero />
+        </div>
 
-        {/* PROBLEM - (This is the component we fixed earlier) */}
+        {/* Problem Section */}
+        <div id="Problem" className="snap-start">
           <Problem />
+        </div>
 
-        {/* FEATURE SECTION - Note: No 'h-screen' here. We let the child define the height. */}
+        {/* Features Section */}
+        <div id="Features" className="snap-start">
           <FeaturesScroll />
+        </div>
 
-        {/* HOW IT WORKS - Keep this as h-screen if it's a static slide */}
+        {/* How It Works Section */}
+        <div id="HowItWorks" className="snap-start">
           <HowItWorks />
+        </div>
 
-        {/* TEAM SECTION */}
+        {/* Team Section */}
+        <div id="Team" className="snap-start">
           <Team />
-        {/* GET IN TOUCH */}
+        </div>
 
+        {/* Get In Touch Section */}
+        <div id="GetInTouch" className="snap-start">
           <GetInTouch />
+        </div>
 
-          <div className="w-full">
-            <Footer />
-          </div>
-          
+        {/* Footer */}
+        <Footer handleScroll={handleScroll} />
       </div>
     </>
   );

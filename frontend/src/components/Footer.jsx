@@ -8,9 +8,17 @@ import {
   faSquareFacebook,
 } from "@fortawesome/free-brands-svg-icons";
 
-const Footer = () => {
+const Footer = ({ handleScroll }) => {
+  const links = [
+    { name: "Home", id: "Hero" },
+    { name: "About Us", id: "Problem" },
+    { name: "Features", id: "Features" },
+    { name: "Reach Us", id: "GetInTouch" },
+    { name: "Privacy & Policy", id: "Privacy" }, // Replace with actual section if available
+  ];
+
   return (
-    <footer className="bg-[#dbdbdb] font-robotoCond relative z-10 ">
+    <footer className="bg-[#dbdbdb] font-robotoCond relative z-10">
       <div className="container mx-auto px-6 py-12 flex flex-col lg:flex-row justify-between gap-12">
         {/* Logo & Brand */}
         <div className="flex flex-col items-center lg:items-start gap-4">
@@ -27,21 +35,15 @@ const Footer = () => {
         {/* Quick Links */}
         <div className="flex flex-col gap-3 text-center lg:text-left">
           <h2 className="text-xl font-semibold mb-2">Quick Links</h2>
-          <a href="#home" className="hover:text-gray-900 transition-all duration-300">
-            Home
-          </a>
-          <a href="#aboutus" className="hover:text-gray-900 transition-all duration-300">
-            About Us
-          </a>
-          <a href="#Features" className="hover:text-gray-900 transition-all duration-300">
-            Features
-          </a>
-          <a href="#Reachus" className="hover:text-gray-900 transition-all duration-300">
-            Reach Us
-          </a>
-          <a href="#privacypolicy" className="hover:text-gray-900 transition-all duration-300">
-            Privacy & Policy
-          </a>
+          {links.map((link, i) => (
+            <button
+              key={i}
+              onClick={() => handleScroll(link.id)}
+              className="hover:text-gray-900 transition-all duration-300 text-left"
+            >
+              {link.name}
+            </button>
+          ))}
         </div>
 
         {/* Social & Contact */}
@@ -88,8 +90,9 @@ const Footer = () => {
         </div>
       </div>
 
+      {/* Scroll To Top Button */}
       <button
-        onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+        onClick={() => handleScroll("Hero")}
         className="
           fixed bottom-6 right-6
           bg-[#fbb040]
@@ -102,10 +105,6 @@ const Footer = () => {
       >
         ↑
       </button>
-
-
-      {/* Bottom decorative shadow / 3D effect */}
-      {/* <div className="absolute bottom-0 left-0 w-full h-6 bg-gradient-to-t from-gray-300 to-transparent pointer-events-none"></div> */}
     </footer>
   );
 };

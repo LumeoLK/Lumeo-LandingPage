@@ -1,13 +1,14 @@
 import React, { useState } from "react";
 
-export default function Navbar() {
+export default function Navbar({ handleScroll }) {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
-    { name: "About Us", href: "#aboutus" },
-    { name: "Features", href: "#Features" },
-    { name: "Reach Us", href: "#Reachus" },
-    { name: "Privacy & Policy", href: "#privacypolicy" },
+    { name: "Problem", href: "Problem" },
+    { name: "Features", href: "Features" },
+    { name: "How It Works", href: "HowItWorks" },
+    { name: "Team", href: "Team" },
+    { name: "Get In Touch", href: "GetInTouch" },
   ];
 
   return (
@@ -26,9 +27,9 @@ export default function Navbar() {
         {/* Desktop Links */}
         <div className="hidden md:flex gap-6">
           {links.map((link, i) => (
-            <a
+            <button
               key={i}
-              href={link.href}
+              onClick={() => handleScroll(link.href)}
               className="px-4 py-2 rounded-xl transition-all duration-300 
                          text-gray-600
                          hover:text-black
@@ -36,7 +37,7 @@ export default function Navbar() {
                          ring-1 ring-transparent hover:ring-black/50"
             >
               {link.name}
-            </a>
+            </button>
           ))}
         </div>
 
@@ -57,10 +58,12 @@ export default function Navbar() {
       {menuOpen && (
         <div className="md:hidden flex flex-col gap-4 px-6 pb-4">
           {links.map((link, i) => (
-            <a
+            <button
               key={i}
-              href={link.href}
-              onClick={() => setMenuOpen(false)} // close menu when clicked
+              onClick={() => {
+                handleScroll(link.href); // Scroll inside container
+                setMenuOpen(false); // Close mobile menu
+              }}
               className="px-4 py-2 rounded-xl transition-all duration-300 
                          text-gray-600
                          hover:text-black
@@ -68,7 +71,7 @@ export default function Navbar() {
                          ring-1 ring-transparent hover:ring-black/50"
             >
               {link.name}
-            </a>
+            </button>
           ))}
         </div>
       )}

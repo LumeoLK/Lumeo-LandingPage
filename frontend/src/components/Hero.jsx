@@ -49,7 +49,7 @@ export default function Hero() {
   // Removed unused state (loaded) unless you plan to use it for the video loading logic
 
   return (
-    <section className="relative w-full h-screen overflow-hidden">
+    <section id="Hero" className="relative w-full h-screen overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-[#f5f5f5] to-[#ffffff] z-0" />
 
       <div className="relative w-full h-screen overflow-hidden">
