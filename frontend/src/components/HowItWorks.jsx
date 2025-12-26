@@ -4,37 +4,46 @@ import { useRef, useState, useEffect } from "react";
 const steps = [
   {
     step: "01",
-    title: "YOUR SPACE BECOMES DIGITAL",
-    subtitle: "Instant Room Intelligence",
-    desc: "Point your phone. Our AI sees what you see — every wall, every corner, every beam of light. In seconds, your physical space transforms into a precise digital canvas.",
-    image: "https://images.unsplash.com/photo-1556912172-45b7abe8b7e1?w=800&q=80",
+    title: "YOUR SPACE, CAPTURED ACCURATELY",
+    subtitle: "True-Scale Environment Scanning",
+    desc: "Lumeo scans your room exactly as it is walls, floors, corners, and depth — without shrinking or approximating dimensions. What you see in AR matches your real space, down to the last measurement.",
+    image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
     color: "from-[#fbb040] to-[#f7931e]",
   },
   {
     step: "02",
-    title: "FURNITURE COMES TO LIFE",
-    subtitle: "Pixel-Perfect AR Placement",
-    desc: "Watch as furniture materializes in your room. Not as a guess. Not as a sketch. But as a perfect 1:1 replica — scaled, shadowed, and styled exactly as it would exist in reality.",
-    image: "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=800&q=80",
+    title: "DISCOVER FURNITURE THAT FITS",
+    subtitle: "An AR-Ready Marketplace",
+    desc: "Scroll through a curated furniture marketplace where every product is AR enabled. Instantly preview items inside your home before making any decision.",
+    image: "https://images.unsplash.com/photo-1615874959474-d609969a20ed?w=800&q=80",
     color: "from-[#f7931e] to-[#fbb040]",
   },
   {
     step: "03",
-    title: "SEE YOUR FUTURE HOME",
-    subtitle: "Zero Uncertainty Shopping",
-    desc: "Walk around it. Study it from every angle. Change the color. Swap the style. This is your space, your furniture, your decision — made with complete clarity.",
+    title: "PLACE IT. MOVE IT. TRUST IT.",
+    subtitle: "Accurate AR Placement",
+    desc: "Place furniture in your space and walk around it freely. Lumeo preserves correct proportions, spacing, and perspective. So what fits in AR will fit in real life.",
     image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=800&q=80",
     color: "from-[#fbb040] to-[#f7931e]",
   },
   {
     step: "04",
-    title: "BUY WITH CONFIDENT",
-    subtitle: "No Regrets, Just Results",
-    desc: "No more measuring tape anxiety. No more \"will it fit?\" doubts. No more costly returns. Just perfect purchases, every time.",
-    image: "https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=800&q=80",
+    title: "SMART RECOMMENDATIONS",
+    subtitle: "AI That Understands Your Space",
+    desc: "Lumeo analyzes your environment and suggests furniture that matches your room. Once an item is placed, complementary pieces are recommended automatically.",
+    image: "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?w=800&q=80",
     color: "from-[#f7931e] to-[#fbb040]",
   },
+  {
+    step: "05",
+    title: "BUILT FOR SELLERS",
+    subtitle: "From Blueprint to Buyer",
+    desc: "Sellers can convert blueprints into 3D models, accept custom orders, and manage everything from a single dashboard including performance and sales insights.",
+    image: "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=80",
+    color: "from-[#fbb040] to-[#f7931e]",
+  },
 ];
+
 
 export default function HowItWorks() {
   return (
@@ -69,27 +78,34 @@ function HeroSection() {
   return (
     <section
       ref={ref}
-      className="relative h-screen flex items-center justify-center overflow-hidden"
+      className="relative h-[50vh] min-h-[420px] flex items-center justify-center overflow-hidden bg-gradient-to-r from-[#231b16] to-[#0a0a0a]"
+
     >
-      {/* Animated mesh gradient */}
-      <div className="absolute inset-0">
-        <motion.div
-          className="absolute inset-0 opacity-30"
-          style={{
-            background: `
-              radial-gradient(at 27% 37%, rgba(251, 176, 64, 0.3) 0px, transparent 50%),
-              radial-gradient(at 97% 21%, rgba(247, 147, 30, 0.2) 0px, transparent 50%),
-              radial-gradient(at 52% 99%, rgba(251, 176, 64, 0.2) 0px, transparent 50%),
-              radial-gradient(at 10% 29%, rgba(247, 147, 30, 0.3) 0px, transparent 50%)
-            `,
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 90, 0],
-          }}
-          transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-        />
-      </div>
+    {/* Award-style organic gradient drift */}
+<div className="absolute inset-0 overflow-hidden">
+  <motion.div
+    className="absolute inset-[-20%] opacity-30"
+    style={{
+      background: `
+        radial-gradient(circle at 30% 30%, rgba(251,176,64,0.25), transparent 45%),
+        radial-gradient(circle at 70% 25%, rgba(247,147,30,0.18), transparent 45%),
+        radial-gradient(circle at 50% 75%, rgba(251,176,64,0.2), transparent 45%)
+      `,
+      filter: "blur(40px)",
+    }}
+    animate={{
+      x: ["-4%", "4%", "-4%"],
+      y: ["-3%", "3%", "-3%"],
+      scale: [1, 1.05, 1],
+    }}
+    transition={{
+      duration: 40,        // very slow = premium
+      ease: "easeInOut",
+      repeat: Infinity,
+    }}
+  />
+</div>
+
 
       {/* Grid overlay with mouse highlight */}
       <div
@@ -152,7 +168,7 @@ function StoryStep({ step, index, total }) {
   return (
     <section
       ref={ref}
-      className="relative min-h-screen flex items-center py-32 px-6 bg-gradient-to-r from-[#0f0f0f] to-[#1a1a1a]"
+      className="relative min-h-screen flex items-center py-32 px-6 bg-gradient-to-r from-[#231b16] to-[#0a0a0a]"
     >
       <div className="relative z-10 max-w-7xl w-full mx-auto grid md:grid-cols-2 gap-12 lg:gap-16 items-center">
         
