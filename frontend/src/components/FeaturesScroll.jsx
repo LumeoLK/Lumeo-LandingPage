@@ -46,12 +46,12 @@ const FeatureSection = () => {
               <div 
                 key={item.id}
                 className={`group cursor-pointer border-l-4 pl-6 transition-all duration-300 ${
-                  activeIndex === index ? 'border-blue-600' : 'border-gray-400 hover:border-gray-600'
+                  activeIndex === index ? 'border-[#ffb443d0]' : 'border-gray-400 hover:border-gray-600'
                 }`}
                 onMouseEnter={() => setActiveIndex(index)}
               >
                 <h3 className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
-                  activeIndex === index ? 'text-[#FBB040]' : 'text-[#4a4a4a]'
+                  activeIndex === index ? 'text-[#fbb0407c]' : 'text-[#4a4a4a]'
                 }`}>
                   {item.title}
                 </h3>
