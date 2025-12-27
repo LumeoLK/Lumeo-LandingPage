@@ -1,53 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
-
 @import "tailwindcss";
 @import "flowbite/dist/flowbite.css";
 
-/* body {
-  font-family: "Inter", sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh;
-} */
-
-/* Main scroll container */
-.snap-container {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-}
-
-/* Hide scrollbar */
-.snap-container::-webkit-scrollbar {
-  display: none;
-}
-
-/* This ensures the scroll container handles the snapping, not the body */
 html,
 body {
   margin: 0;
   padding: 0;
-  height: 100%;
-  overflow: hidden; /* Hide the default browser scrollbar */
+  width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scroll-behavior: smooth;
 }
 
-/* Force every section to force the scroll to stop */
-.snap-always {
-  scroll-snap-stop: always;
-}
-
-/* Hide scrollbar for Chrome, Safari and Opera (Optional, for cleaner look) */
-.snap-y::-webkit-scrollbar {
-  display: none;
-}
-
-/* Hide scrollbar for IE, Edge and Firefox */
-.snap-y {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
+/* Remove any Lenis-specific styles if not using it */
