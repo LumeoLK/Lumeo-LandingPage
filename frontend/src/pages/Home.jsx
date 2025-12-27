@@ -1,6 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import Lenis from 'lenis';
-import 'lenis/dist/lenis.css';
+
 
 // Components
 import Navbar from "../components/NavBar.jsx";
