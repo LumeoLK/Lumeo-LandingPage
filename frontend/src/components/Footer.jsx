@@ -11,10 +11,11 @@ import {
 const Footer = ({ handleScroll }) => {
   const links = [
     { name: "Home", id: "Hero" },
-    { name: "About Us", id: "Problem" },
+    { name: "Problem", id: "Problem" },
     { name: "Features", id: "Features" },
-    { name: "Reach Us", id: "GetInTouch" },
-    { name: "Privacy & Policy", id: "Privacy" }, // Replace with actual section if available
+    { name: "How It Works", href: "HowItWorks" },
+    { name: "Team", href: "Team" },
+    { name: "Get In Touch", href: "GetInTouch" },
   ];
 
   return (
