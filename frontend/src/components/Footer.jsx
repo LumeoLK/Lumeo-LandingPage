@@ -13,9 +13,9 @@ const Footer = ({ handleScroll }) => {
     { name: "Home", id: "Hero" },
     { name: "Problem", id: "Problem" },
     { name: "Features", id: "Features" },
-    { name: "How It Works", href: "HowItWorks" },
-    { name: "Team", href: "Team" },
-    { name: "Get In Touch", href: "GetInTouch" },
+    { name: "How It Works", id: "HowItWorks" },
+    { name: "Team", id: "Team" },
+    { name: "Get In Touch", id: "GetInTouch" },
   ];
 
   return (
@@ -74,7 +74,7 @@ const Footer = ({ handleScroll }) => {
               <FontAwesomeIcon icon={faEnvelope} />
             </a>
             <a
-              href="https://www.instagram.com"
+              href="https://www.instagram.com/lumeo_app?igsh=aXA4em9qZXk0dmh0&utm_source=qr"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-pink-500 transform hover:scale-110 transition-all duration-300"
@@ -85,7 +85,7 @@ const Footer = ({ handleScroll }) => {
           <div className="mt-2 text-gray-600 text-center lg:text-right">
             <p>© 2025 Lumeo. All rights reserved.</p>
             <p className="flex items-center justify-center lg:justify-end gap-2 mt-1">
-              <FontAwesomeIcon icon={faPhone} /> +1 (234) 567-890
+              <FontAwesomeIcon icon={faPhone} /> +94 75 527 8882
             </p>
           </div>
         </div>

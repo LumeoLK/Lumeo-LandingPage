@@ -23,7 +23,8 @@ const contentData = [
     id: 4,
     title: 'Bespoke Seller Collaboration',
     description: 'Need something unique? Connect directly with specific sellers to request custom dimensions, fabrics, or finishes, bridging the gap between mass retail and custom craftsmanship.',
-    image: 'https://images.unsplash.com/photo-1581539250439-c92302a6f46d?q=80&w=2070&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2070&auto=format&fit=crop'
+
   }
 ];
 
@@ -41,7 +42,7 @@ const FeatureSection = () => {
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           
           {/* Left Side: Accordion List */}
-          <div className="w-full lg:w-1/2 flex flex-col gap-6">
+          <div className="font-[Anton] w-full lg:w-1/2 flex flex-col gap-6">
             {contentData.map((item, index) => (
               <div 
                 key={item.id}
@@ -50,11 +51,31 @@ const FeatureSection = () => {
                 }`}
                 onMouseEnter={() => setActiveIndex(index)}
               >
-                <h3 className={`text-2xl font-bold mb-2 transition-colors duration-300 ${
-                  activeIndex === index ? 'text-[#fbb0407c]' : 'text-[#4a4a4a]'
-                }`}>
-                  {item.title}
-                </h3>
+                <h3
+  className={`relative overflow-hidden text-3xl mb-2 tracking-wide uppercase
+  transition-colors duration-300
+  ${
+    activeIndex === index
+      ? 'text-white'
+      : 'text-[#4a4a4a] group-hover:text-white'
+  }`}
+>
+  {/* Background fill */}
+  <span
+    className={`absolute inset-0 z-0 origin-left transform scale-x-0
+    transition-transform duration-500 ease-out
+    ${
+      activeIndex === index
+        ? 'scale-x-100 bg-[#ffb443d0]'
+        : 'group-hover:scale-x-100 bg-gray-600'
+    }`}
+  />
+
+  {/* Text layer */}
+  <span className="relative z-10 px-2">
+    {item.title.toUpperCase()}
+  </span>
+</h3>
                 
                 {/* Content: Visible only if active */}
                 <div 
@@ -62,7 +83,7 @@ const FeatureSection = () => {
                     activeIndex === index ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                   }`}
                 >
-                  <p className="text-gray-700 leading-relaxed font-medium">
+                  <p className="text-gray-700 leading-relaxed text-lg font-[Outfit]">
                     {item.description}
                   </p>
                 </div>
