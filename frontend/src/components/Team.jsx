@@ -10,42 +10,42 @@ const teamMembers = [
   {
     id: 1,
     name: "Vinuka Jayavihan",
-    role: "FOUNDER",
+    role: "DEVELOPER",
     code: "AX-01",
     img: "https://www.lumeo.ltd/assets/vinuka.jpg",
   },
   {
     id: 2,
     name: "Samindi Liyanage",
-    role: "PRODUCT",
+    role: "DEVELOPER",
     code: "SR-88",
     img: "https://www.lumeo.ltd/assets/umesha.jpg",
   },
   {
     id: 3,
     name: "Pulina Pasan",
-    role: "ENGINEER",
+    role: "DEVELOPER",
     code: "DK-92",
     img: "https://www.lumeo.ltd/assets/pulina.jpg",
   },
   {
     id: 4,
     name: "Induwara Dilshan",
-    role: "DESIGNER",
+    role: "DEVELOPER",
     code: "ER-04",
     img: "https://www.lumeo.ltd/assets/induwara.jpeg",
   },
   {
     id: 5,
     name: "Mayura Thayalan",
-    role: "MARKETING",
+    role: "DEVELOPER",
     code: "MT-05",
     img: "https://www.lumeo.ltd/assets/mayura.jpeg",
   },
   {
     id: 6,
     name: "Maneth Kaveen",
-    role: "OPS LEAD",
+    role: "DEVELOPER",
     code: "LW-06",
     img: "https://www.lumeo.ltd/assets/maneth.jpg",
   },
@@ -146,11 +146,15 @@ const ScannerCard = ({ member, index }) => {
           transition={{ duration: 0.5, ease: "easeOut" }}
           className="flex flex-col items-center"
         >
-          <h3 className="text-4xl md:text-5xl font-bold text-white uppercase leading-[0.9]">
+          <h3 className="text-4xl md:text-5xl  text-white uppercase leading-[0.9] font-[Anton]">
             {firstName}
           </h3>
-          <p className="text-white/80 text-sm uppercase tracking-wide mt-1">
+          <p className="text-white/80 text-sm uppercase tracking-wide mt-1 font-[Outfit]">
             {lastName}
+          </p>
+              {/* Role */}
+          <p className="mt-1 text-[#fbb040] text-xs uppercase tracking-[0.3em] font-[Outfit]">
+            {member.role}
           </p>
         </motion.div>
       </div>
@@ -255,7 +259,7 @@ const Team = () => {
             <h1 className="text-8xl md:text-[12rem] lg:text-[14rem] font-bold text-white uppercase tracking-tight leading-none">
               Meet the <span className="text-[#fbb040]">Team</span>
             </h1>
-            <p className="text-white/60 text-xl md:text-2xl mt-8 font-light tracking-wide">
+            <p className="text-white/60 text-xl md:text-2xl mt-8 font-light tracking-wide font-[Outfit]">
               The minds behind the innovation
             </p>
           </div>

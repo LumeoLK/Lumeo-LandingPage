@@ -6,7 +6,7 @@ const steps = [
     step: "01",
     title: "YOUR SPACE, CAPTURED ACCURATELY",
     subtitle: "True-Scale Environment Scanning",
-    desc: "Lumeo scans your room exactly as it is walls, floors, corners, and depth — without shrinking or approximating dimensions. What you see in AR matches your real space, down to the last measurement.",
+    desc: "Lumeo scans your room exactly as it is walls, floors, corners, and depth, without shrinking or approximating dimensions. What you see in AR matches your real space, down to the last measurement.",
     image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80",
     color: "from-[#fbb040] to-[#f7931e]",
   },
@@ -146,7 +146,7 @@ function HeroSection() {
           />
 
           <motion.p
-            className="mt-12 text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto"
+            className="mt-12 text-xl md:text-2xl text-gray-400 font-light max-w-3xl mx-auto font-[Outfit]"
             initial={{ y: 50, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             transition={{ duration: 1, delay: 1 }}
@@ -266,7 +266,7 @@ function StoryStep({ step, index, total }) {
 
           {/* Description */}
           <motion.p
-            className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 font-outfit"
+            className="text-lg md:text-xl text-gray-300 leading-relaxed mb-8 font-[Outfit]"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.3 }}
