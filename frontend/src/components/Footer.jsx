@@ -9,13 +9,14 @@ import {
 } from "@fortawesome/free-brands-svg-icons";
 
 const Footer = ({ handleScroll }) => {
+  // FIXED: All objects now consistently use the 'id' key
   const links = [
     { name: "Home", id: "Hero" },
     { name: "Problem", id: "Problem" },
     { name: "Features", id: "Features" },
-    { name: "How It Works", href: "HowItWorks" },
-    { name: "Team", href: "Team" },
-    { name: "Get In Touch", href: "GetInTouch" },
+    { name: "How It Works", id: "HowItWorks" }, // Changed from href to id
+    { name: "Team", id: "Team" },               // Changed from href to id
+    { name: "Get In Touch", id: "GetInTouch" }, // Changed from href to id
   ];
 
   return (
