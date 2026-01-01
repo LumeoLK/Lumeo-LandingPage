@@ -135,18 +135,18 @@ export default function Problem() {
         <div className="flex-1">
           <h2 className="font-[Anton] text-white leading-[1.05] max-w-lg overflow-hidden relative">
             <motion.span
-              className="block text-[4.5rem] md:text-[5.5rem] tracking-tight relative overflow-hidden mt-10p"
+              className="block text-[4.5rem] md:text-[5.5rem] tracking-tight relative overflow-hidden "
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
             >
               <span className="absolute inset-0 bg-[#fbb040] translate-x-[-100%] animate-slideRight rounded-full"></span>
-              <span className="relative text-[8rem]"><div className="overflow-hidden py-2 w-90">
+              <span className="relative text-[9rem]"><div className="overflow-hidden py-2 w-100">
               <StaggerText>BUYING</StaggerText>
             </div></span>
             </motion.span>
             <motion.span
-              className="block text-[4.5rem] md:text-[5.5rem] tracking-tight relative overflow-hidden mt-10p"
+              className="block text-[4.5rem] md:text-[5.5rem] tracking-tight relative overflow-hidden"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.2 }}
@@ -169,7 +169,7 @@ export default function Problem() {
               </span>
             </motion.span>
             <motion.span
-              className="block text-[4rem] md:text-[5rem] tracking-tight relative overflow-hidden mt-[-10px]"
+              className="block text-[4rem] md:text-[5rem] tracking-tight relative overflow-hidden mt-2p"
               initial={{ width: 0 }}
               animate={{ width: "100%" }}
               transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }}
@@ -180,7 +180,7 @@ export default function Problem() {
           </h2>
           <p className="text-gray-300 text-md max-w-md mt-6">
             Dimensions lie. Photos deceive. Returns cost time and money. 
-            These are real frustrations your customers face — and they deserve certainty before they commit.
+            These are real frustrations your customers face and they deserve certainty before they commit.
           </p>
         </div>
 
