@@ -52,7 +52,7 @@ export default function HowItWorks() {
       {steps.map((step, i) => (
         <StoryStep key={i} step={step} index={i} total={steps.length} />
       ))}
-      <ClosingSection />
+      {/* <ClosingSection /> */}
     </div>
   );
 }
