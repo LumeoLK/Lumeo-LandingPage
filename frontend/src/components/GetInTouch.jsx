@@ -3,7 +3,7 @@ import axios from "axios";
 import { Label, TextInput, Textarea } from "flowbite-react"; // Removed Button from here
 import { Toaster, toast } from "sonner"; // <--- Import Sonner
 import { LiquidButton } from "./LiquidButton.jsx"; // <--- Import your new component
-
+import Footer from "./Footer.jsx";
 const GetInTouch = () => {
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -210,7 +210,9 @@ const GetInTouch = () => {
           />
         </div>
       </div>
+     
     </section>
+    
   );
 };
 
